@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Checkout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--accent:#ff6b6b;--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280}
+        *{box-sizing:border-box;font-family:'Poppins',sans-serif}
+        body{margin:0;background:linear-gradient(180deg,#eef2ff 0%, #f6fbff 100%);color:#111}
+        .wrap{max-width:760px;margin:40px auto;padding:24px}
+        .card{background:var(--card);border-radius:12px;padding:22px;box-shadow:0 8px 30px rgba(16,24,40,0.08)}
+        header{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+        header h1{margin:0;font-size:20px;letter-spacing:0.4px}
+        .badge{background:linear-gradient(90deg,var(--accent),#ffa07a);color:#fff;padding:6px 10px;border-radius:8px;font-weight:600;font-size:13px}
+        form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .full{grid-column:1/-1}
+        label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+        input[type=text],input[type=tel],input[type=number]{width:100%;padding:10px 12px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
+        .radios{display:flex;flex-direction:column;gap:6px}
+        .captcha-row{display:flex;align-items:center;gap:12px}
+        #captchaBox{padding:10px 14px;border-radius:8px;background:#f3f6ff;border:1px dashed #cbd5e1;font-weight:700;letter-spacing:4px}
+        button, input[type=submit]{cursor:pointer;border:0;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:600}
+        #refreshCaptcha{background:#fff;color:var(--accent);border:1px solid #ffdede;padding:8px 10px}
+        #captchaError{color:#d0342c;font-size:13px;display:none}
+        .actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:12px}
+        .note{font-size:13px;color:var(--muted)}
+        @media (max-width:640px){form{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start} .actions{justify-content:stretch}}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="card">
+            <header>
+                <div>
+                    <h1>Place Your Order</h1>
+                    <div class="note">Fast & secure checkout</div>
+                </div>
+                <div style="margin-left:auto"><span class="badge">Billing Details</span></div>
+            </header>
+
+            <form id="checkoutForm" action="success.html" method="get" novalidate>
+                <div class="full">
+                    <label>Mobile Number</label>
+                    <input required type="tel" name="mobile" placeholder="e.g. +1 555 123 4567">
+                </div>
+
+                <div class="full">
+                    <label>Delivery Address</label>
+                    <input required type="text" name="address" placeholder="Street, City, State, ZIP">
+                </div>
+
+                <div>
+                    <label>Payment Method</label>
+                    <div class="radios">
+                        <label><input type="radio" name="payment" value="cod" required> Cash on Delivery</label>
+                        <label><input type="radio" name="payment" value="upi"> UPI</label>
+                        <label><input type="radio" name="payment" value="card"> Debit / Credit Card</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label>Order Summary</label>
+                    <div style="background:#fff8f6;border:1px solid #ffe7e0;padding:10px;border-radius:8px;font-size:14px">Items: 3 &nbsp; • &nbsp; Total: ₹1,299</div>
+                </div>
+
+                <div class="full">
+                    <label>Enter the captcha</label>
+                    <div class="captcha-row">
+                        <div id="captchaBox">------</div>
+                        <button type="button" id="refreshCaptcha">Refresh</button>
+                        <input type="text" id="captchaInput" name="captcha" placeholder="Type captcha here" required style="flex:1;padding:10px;border:1px solid #e6e9ef;border-radius:8px">
+                    </div>
+                    <div id="captchaError">Captcha does not match.</div>
+                </div>
+
+                <div class="full actions">
+                    <div class="note">By placing the order you agree to our terms.</div>
+                    <input type="submit" value="Place Order">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+    // Simple client-side captcha
+    function generateCaptcha() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let code = '';
+        for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+        return code;
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+        const captchaBox = document.getElementById('captchaBox');
+        const refreshBtn = document.getElementById('refreshCaptcha');
+        const captchaInput = document.getElementById('captchaInput');
+        const captchaError = document.getElementById('captchaError');
+        const form = document.getElementById('checkoutForm');
+
+        let current = generateCaptcha();
+        captchaBox.textContent = current;
+
+        refreshBtn.addEventListener('click', function(){
+            current = generateCaptcha();
+            captchaBox.textContent = current;
+            captchaError.style.display = 'none';
+            captchaInput.value = '';
+        });
+
+        form.addEventListener('submit', function(e){
+            if (captchaInput.value.trim().toUpperCase() !== current) {
+                e.preventDefault();
+                captchaError.style.display = 'block';
+                // regenerate captcha on failure
+                current = generateCaptcha();
+                captchaBox.textContent = current;
+                captchaInput.value = '';
+            }
+        });
+    });
+    </script>
+</body>
+</html>

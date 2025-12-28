@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login — ShopEase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="page site-header">
+      <h1 class="logo">ShopEase</h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Login</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <section class="auth-panel">
+        <h2>Welcome back</h2>
+        <p class="muted center">Log in to continue to ShopEase</p>
+        <form action="index.html" class="auth-form" novalidate>
+          <label for="mobile">Mobile Number</label>
+          <input id="mobile" name="mobile" type="tel" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 9876543210" required>
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="Enter your password" required>
+
+          <div class="form-actions">
+            <a class="text-button" href="otp.html">Send OTP</a>
+            <input type="submit" value="Login" class="primary">
+          </div>
+        </form>
+
+        <p class="center">Don't have an account? <a href="register.html">Register</a></p>
+      </section>
+    </main>
+
+    <footer class="page site-footer">
+      <p>&copy; 2025 ShopEase. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+

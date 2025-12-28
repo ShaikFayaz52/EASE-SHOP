@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShopEase </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <div>
+                <h1 class="logo">ShopEase</h1>
+                <div class="muted" style="font-size:13px">Fast — Friendly — Reliable</div>
+            </div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="products.html">Products</a>
+                <a href="cart.html">Cart</a>
+                <a href="login.html">Login</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero-card">
+                <div class="hero-left">
+                    <div class="kicker">Limited Time</div>
+                    <h2>Discover deals on top brands</h2>
+                    <p class="muted">Curated picks, fast shipping, and easy returns. Find what you love.</p>
+                    <div style="margin-top:12px;display:flex;gap:10px">
+                        <a class="primary" href="products.html">Shop Now</a>
+                        <a class="text-button" href="products.html">Explore</a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="sale">UP TO 50% OFF</div>
+                </div>
+            </section>
+
+            <section style="margin-top:20px">
+                <h3>Categories</h3>
+                <div class="categories">
+                    <div class="cat">Electronics</div>
+                    <div class="cat">Fashion</div>
+                    <div class="cat">Grocery</div>
+                    <div class="cat">Home</div>
+                    <div class="cat">Beauty</div>
+                    <div class="cat">Toys</div>
+                </div>
+            </section>
+
+            <!-- Deals carousel -->
+            <section style="margin-top:22px">
+                <h3>Top Deals</h3>
+                <div class="deals" id="dealsCarousel">
+                    <div class="deal-item"><img src="https://source.unsplash.com/1200x400/?sale,shopping" alt="deal"></div>
+                    <div class="deal-item"><img src="https://source.unsplash.com/1200x400/?discount,products" alt="deal"></div>
+                    <div class="deal-item"><img src="https://source.unsplash.com/1200x400/?electronics,offer" alt="deal"></div>
+                </div>
+            </section>
+
+            <!-- Home product grid with filters -->
+            <section style="margin-top:22px">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                    <h3>Popular Products</h3>
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <input id="searchBox" placeholder="Search products" style="padding:8px;border-radius:8px;border:1px solid #e6e9ef">
+                        <select id="sortSelect" style="padding:8px;border-radius:8px;border:1px solid #e6e9ef">
+                            <option value="popular">Sort: Popular</option>
+                            <option value="price_asc">Price: Low to High</option>
+                            <option value="price_desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="homeProducts" class="product-grid" style="margin-top:12px"></div>
+            </section>
+
+            <section style="margin-top:18px">
+                <h3>Featured</h3>
+                <div class="product-grid">
+                    <div class="card">
+                        <img src="images/product1.svg" alt="Smartphone">
+                        <div class="title">Smartphone</div>
+                        <div class="price">₹15,999</div>
+                        <button>Add to cart</button>
+                    </div>
+                    <div class="card">
+                        <img src="images/product2.svg" alt="Headphones">
+                        <div class="title">Headphones</div>
+                        <div class="price">₹1,999</div>
+                        <button>Add to cart</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div>&copy; 2025 ShopEase. All rights reserved.</div>
+            <div style="margin-top:6px">support@fayazshopping.com</div>
+        </footer>
+    </div>
+
+</body>
+</html>

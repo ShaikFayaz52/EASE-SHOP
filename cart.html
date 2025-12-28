@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart | ShopEase</title>
+        <link rel="stylesheet" href="styles.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+    <header>
+        <h1>ShopEase</h1>
+        <nav>
+            <a href="index.html">Home </a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="products.html">Products </a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        </nav>
+    </header>
+
+    <main class="page">
+        <h2>Your Cart</h2>
+
+        <div class="cart-list" id="cart-items">
+            <!-- items injected by main.js -->
+        </div>
+
+        <div class="cart-summary">Total: <span id="cart-total">₹0</span></div>
+        <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end">
+            <button onclick="clearCart()">Clear Cart</button>
+            <a id="checkout-link" href="checkout.html" onclick="proceedToCheckout(event)" style="background-color:#007bff; color:white; border:none; padding:8px 16px; border-radius:4px; text-decoration:none; display:inline-block;">Proceed to Checkout</a>
+        </div>
+    </main>
+
+    <footer class="page">
+        <p>&copy; 2025 FAYAZSHOPPING</p>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        function proceedToCheckout(e){
+            var countEl = document.getElementById('cart-count');
+            var count = countEl ? parseInt(countEl.textContent) || 0 : 0;
+            if(count === 0){
+                e.preventDefault();
+                alert('Your cart is empty. Add items before checkout.');
+                return false;
+            }
+            return true;
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            var link = document.getElementById('checkout-link');
+            var countEl = document.getElementById('cart-count');
+            var count = countEl ? parseInt(countEl.textContent) || 0 : 0;
+            if(link){
+                if(count === 0){
+                    link.style.backgroundColor = '#6c757d';
+                    link.style.pointerEvents = 'none';
+                    link.style.cursor = 'not-allowed';
+                    link.title = 'Cart is empty';
+                } else {
+                    link.style.pointerEvents = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+            
