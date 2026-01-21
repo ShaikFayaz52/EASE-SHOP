@@ -12,7 +12,7 @@ HTML5
 
 CSS3
 
-(No JavaScript, No Backend – UI simulation only)
+(No JavaScript used -main function only in js, No Backend – UI simulation only)
 
 📂 Project Pages
 
@@ -94,3 +94,4 @@ Responsive design improvements
 
 Practice Project by Student
 For academic and self-learning purposes.
+
