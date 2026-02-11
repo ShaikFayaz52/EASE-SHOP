@@ -16,6 +16,13 @@ body {
   padding: 24px;
 }
 
+:root{
+  --primary:#2874f0; /* Flipkart blue */
+  --accent:#ffcc00; /* Flipkart yellow */
+  --muted:#6b7280;
+  --card-bg:#ffffff;
+}
+
 /* Card-like form wrapper (applies when form is top-level) */
 form {
   width: 100%;
@@ -98,6 +105,22 @@ p { font-size: 14px; }
 .site-header .nav { display: flex; gap: 12px; align-items: center; }
 .site-header .nav a { color: #475569; font-weight: 600; text-decoration: none; padding: 8px 10px; border-radius: 8px; }
 .site-header .nav a:hover { background: rgba(14,165,233,0.06); color: #0ea5e9; }
+
+/* Header search / cart */
+.site-header .search {
+  flex: 1; max-width: 520px; margin: 0 14px; display:flex; align-items:center; gap:8px;
+}
+.site-header .search input{ flex:1; padding:10px 12px; border-radius:6px; border:1px solid #e6e9ee }
+.site-header .cart-btn{ background:transparent; border:0; cursor:pointer; display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:8px }
+.site-header .cart-count{ background:var(--accent); color:#111; padding:3px 8px; border-radius:999px; font-weight:700; font-size:13px }
+
+/* Cart drawer */
+.cart-drawer{ position:fixed; right:0; top:0; height:100vh; width:360px; max-width:92%; background:var(--card-bg); box-shadow:-16px 0 40px rgba(2,6,23,0.2); transform:translateX(100%); transition:transform .28s ease; z-index:1200; display:flex; flex-direction:column }
+.cart-drawer.open{ transform:translateX(0) }
+.cart-drawer .header{ padding:14px 16px; border-bottom:1px solid #eef2f7; display:flex; align-items:center; justify-content:space-between }
+.cart-drawer .items{ padding:12px; overflow:auto; flex:1 }
+.cart-drawer .footer{ padding:12px; border-top:1px solid #eef2f7 }
+
 
 /* Page container */
 .page { width: 100%; max-width: 1100px; margin: 24px auto; padding: 0 16px; }

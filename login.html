@@ -8,11 +8,16 @@
 </head>
 <body>
     <header class="page site-header">
-      <h1 class="logo">ShopEase</h1>
+      <div>
+        <h1 class="logo">ShopEase</h1>
+      </div>
+      <div class="search">
+        <input id="globalSearch" placeholder="Search for products, brands and more">
+      </div>
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="products.html">Products</a>
-        <a href="cart.html">Cart</a>
+        <button class="cart-btn" onclick="openCartDrawer()">Cart <span class="cart-count">(<span id="cart-count">0</span>)</span></button>
         <a href="login.html">Login</a>
       </nav>
     </header>
