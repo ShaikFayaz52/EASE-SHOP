@@ -96,6 +96,7 @@
         </div>
     </div>
 
+    <script src="main.js"></script>
     <script>
     // Simple client-side captcha
     function generateCaptcha() {
@@ -123,14 +124,31 @@
         });
 
         form.addEventListener('submit', function(e){
+            e.preventDefault();
             if (captchaInput.value.trim().toUpperCase() !== current) {
-                e.preventDefault();
                 captchaError.style.display = 'block';
                 // regenerate captcha on failure
                 current = generateCaptcha();
                 captchaBox.textContent = current;
                 captchaInput.value = '';
+                return;
             }
+
+            // Build order from cart and save to localStorage
+            const cart = (typeof getCart === 'function') ? getCart() : JSON.parse(localStorage.getItem('cart')||'[]');
+            if(!cart || cart.length === 0){
+                alert('Your cart is empty. Add items before placing an order.');
+                return;
+            }
+            const total = cart.reduce((s,i)=>s + (i.price * i.qty), 0);
+            const orders = JSON.parse(localStorage.getItem('orders')||'[]');
+            const order = { id: Math.floor(Math.random()*900000)+100000, date: Date.now(), items: cart, total };
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+
+            // clear cart and go to success page
+            if(typeof clearCart === 'function') clearCart(); else localStorage.removeItem('cart');
+            window.location.href = 'success.html';
         });
     });
     </script>
