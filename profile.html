@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Profile — ShopEase</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .profile-card{max-width:640px;margin:18px auto;padding:18px;background:#fff;border-radius:10px;box-shadow:0 8px 26px rgba(15,23,42,0.06)}
+    .field{margin-bottom:10px}
+    label{display:block;margin-bottom:6px;font-weight:600}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <h1 class="logo">ShopEase</h1>
+      <div class="muted" style="font-size:13px">Your profile</div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="orders.html">Orders</a>
+      <a href="cart.html">Cart</a>
+      <a href="login.html">Account</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="profile-card">
+      <h2 id="greeting">Hello</h2>
+      <div id="signedOutNotice" class="muted">You are not signed in. <a href="login.html">Sign in</a></div>
+
+      <div id="profileForm" style="display:none">
+        <div class="field"><label>Name</label><input id="name" type="text" /></div>
+        <div class="field"><label>Email</label><input id="email" type="email" /></div>
+        <div class="field"><label>Phone</label><input id="phone" type="tel" /></div>
+        <div class="field"><label>Address</label><input id="address" type="text" /></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+          <button id="saveProfile" class="primary">Save</button>
+          <button id="signOut" class="text-button">Sign out</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">&copy; 2025 ShopEase</footer>
+
+  <script src="auth.js"></script>
+  <script>
+    function getStoredUser(){ try{ return JSON.parse(localStorage.getItem('appUser')||'null'); }catch(e){ return null; } }
+    function getProfileKey(uid){ return 'profile_'+uid; }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const user = getStoredUser();
+      const greeting = document.getElementById('greeting');
+      const notice = document.getElementById('signedOutNotice');
+      const form = document.getElementById('profileForm');
+      if(!user){ notice.style.display='block'; form.style.display='none'; greeting.textContent='Hello'; return; }
+      notice.style.display='none'; form.style.display='block'; greeting.textContent = 'Hello, ' + (user.displayName || user.phoneNumber || user.email || 'Customer');
+
+      // load profile from localStorage
+      const key = getProfileKey(user.uid);
+      const profile = JSON.parse(localStorage.getItem(key) || '{}');
+      document.getElementById('name').value = profile.name || user.displayName || '';
+      document.getElementById('email').value = profile.email || user.email || '';
+      document.getElementById('phone').value = profile.phone || user.phoneNumber || '';
+      document.getElementById('address').value = profile.address || '';
+
+      document.getElementById('saveProfile').addEventListener('click', ()=>{
+        const data = { name: document.getElementById('name').value.trim(), email: document.getElementById('email').value.trim(), phone: document.getElementById('phone').value.trim(), address: document.getElementById('address').value.trim() };
+        localStorage.setItem(key, JSON.stringify(data));
+        alert('Profile saved locally.');
+      });
+
+      document.getElementById('signOut').addEventListener('click', ()=>{ window.appAuth.signOut(); window.location.href='index.html'; });
+    });
+  </script>
+</body>
+</html>

@@ -20,28 +20,80 @@
 
     <main class="page">
       <section class="auth-panel">
-        <h2>Welcome back</h2>
-        <p class="muted center">Log in to continue to ShopEase</p>
-        <form action="index.html" class="auth-form" novalidate>
-          <label for="mobile">Mobile Number</label>
-          <input id="mobile" name="mobile" type="tel" inputmode="numeric" pattern="[0-9]*" placeholder="e.g. 9876543210" required>
+        <h2>Sign in</h2>
+        <p class="muted center">Use phone number or Gmail to sign in</p>
 
-          <label for="password">Password</label>
-          <input id="password" name="password" type="password" placeholder="Enter your password" required>
-
-          <div class="form-actions">
-            <a class="text-button" href="otp.html">Send OTP</a>
-            <input type="submit" value="Login" class="primary">
+        <div class="auth-form">
+          <div style="margin-bottom:12px">
+            <label for="phoneInput">Mobile Number</label>
+            <input id="phoneInput" type="tel" placeholder="+91 9876543210" />
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button id="sendOtpBtn" class="primary">Send OTP</button>
+              <button id="verifyOtpBtn" class="primary" style="display:none">Verify OTP</button>
+            </div>
+            <input id="otpInput" placeholder="Enter OTP" style="margin-top:8px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
           </div>
-        </form>
 
-        <p class="center">Don't have an account? <a href="register.html">Register</a></p>
+          <div style="margin:18px 0;text-align:center">— OR —</div>
+
+          <div style="display:flex;gap:8px;justify-content:center">
+            <button id="googleSignIn" class="primary">Sign in with Google</button>
+          </div>
+
+          <p class="center" style="margin-top:12px">Don't have an account? <a href="register.html">Register</a></p>
+        </div>
       </section>
     </main>
 
     <footer class="page site-footer">
       <p>&copy; 2025 ShopEase. All rights reserved.</p>
     </footer>
+
+    <!-- Firebase SDK: optional. If you want real SMS/email delivery, paste your config into `firebase-config.js` and include these scripts. -->
+    <script src="firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="auth.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function(){
+        const phoneInput = document.getElementById('phoneInput');
+        const sendBtn = document.getElementById('sendOtpBtn');
+        const verifyBtn = document.getElementById('verifyOtpBtn');
+        const otpInput = document.getElementById('otpInput');
+        const googleBtn = document.getElementById('googleSignIn');
+
+        sendBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          const phone = phoneInput.value.trim();
+          if(!phone){ alert('Enter phone number'); return; }
+          // If Firebase available, use signInWithPhoneNumber flow (requires reCAPTCHA and config)
+          if(window.FIREBASE_CONFIG && window.firebase && firebase.auth){
+            // set up invisible reCAPTCHA
+            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sendOtpBtn', { size: 'invisible' });
+            firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
+              .then(confirmationResult => { window.confirmationResult = confirmationResult; alert('OTP sent'); verifyBtn.style.display='inline-block'; })
+              .catch(err => alert('Failed to send OTP: '+err.message));
+            return;
+          }
+          // dev fallback
+          window.appAuth.sendPhoneOtpDev(phone).then(()=>{ verifyBtn.style.display='inline-block'; });
+        });
+
+        verifyBtn.addEventListener('click', function(e){
+          e.preventDefault();
+          const phone = phoneInput.value.trim();
+          const code = otpInput.value.trim();
+          if(window.FIREBASE_CONFIG && window.firebase && window.confirmationResult){
+            window.confirmationResult.confirm(code).then(result=>{ window.location.href='profile.html'; }).catch(err=>alert('Invalid code'));
+            return;
+          }
+          const ok = window.appAuth.verifyOtpDev(phone, code);
+          if(!ok) alert('Invalid OTP');
+        });
+
+        googleBtn.addEventListener('click', function(e){ e.preventDefault(); window.appAuth.signInWithGoogle(); });
+      });
+    </script>
 </body>
 </html>
 

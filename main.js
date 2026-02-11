@@ -128,6 +128,10 @@ const PRODUCT_CATALOG = [
   { id:'p4', title:'Bluetooth Speaker', price:1299, img:'https://source.unsplash.com/800x600/?speaker', category:'audio', rating:4.3, old:1599 },
   { id:'p5', title:'Running Shoes', price:2999, img:'https://source.unsplash.com/800x600/?shoes', category:'fashion', rating:4.4, old:3999 },
   { id:'p6', title:'Microwave Oven', price:6999, img:'https://source.unsplash.com/800x600/?microwave', category:'home', rating:4.0, old:8999 }
+  ,{ id:'p7', title:'Daily Grocery Pack', price:499, img:'https://source.unsplash.com/800x600/?grocery,food', category:'grocery', rating:4.2 }
+  ,{ id:'p8', title:'Electric Kettle', price:2199, img:'https://source.unsplash.com/800x600/?kettle,home', category:'home', rating:4.1 }
+  ,{ id:'p9', title:'Daily Face Cream', price:699, img:'https://source.unsplash.com/800x600/?skincare,beauty', category:'beauty', rating:4.3 }
+  ,{ id:'p10', title:'Remote Car', price:1299, img:'https://source.unsplash.com/800x600/?toy,children', category:'toys', rating:4.0 }
 ];
 
 function createProductCard(p){
