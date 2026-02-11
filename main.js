@@ -26,14 +26,25 @@ function renderCart(){
   if(!el) return;
   const cart = getCart();
   el.innerHTML = '';
-  if(cart.length===0){ el.innerHTML = '<p>Your cart is empty.</p>'; document.getElementById('cart-total').textContent='₹0'; return; }
+  if(cart.length===0){
+    el.innerHTML = '<p>Your cart is empty.</p>';
+    document.getElementById('cart-total').textContent='₹0';
+    renderCartPreview();
+    updateCheckoutState();
+    return;
+  }
   cart.forEach(item=>{
     const div = document.createElement('div'); div.className='cart-item';
     div.innerHTML = `
       <img src="${item.img}" alt="${item.title}">
       <div style="flex:1">
         <div style="font-weight:600">${item.title}</div>
-        <div>Qty: ${item.qty} • ₹${(item.price*item.qty).toFixed(2)}</div>
+        <div style="margin-top:6px; display:flex; align-items:center; gap:8px">
+          <button aria-label="Decrease quantity" class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+          <input aria-label="Quantity for ${item.title}" class="qty-input" type="number" min="1" value="${item.qty}" onchange="setQuantity('${item.id}', this.value)" style="width:56px; text-align:center" />
+          <button aria-label="Increase quantity" class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+          <div style="margin-left:8px">₹${(item.price*item.qty).toFixed(2)}</div>
+        </div>
       </div>
       <div>
         <button onclick="removeFromCart('${item.id}')">Remove</button>
@@ -42,6 +53,53 @@ function renderCart(){
   });
   const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
   document.getElementById('cart-total').textContent = `₹${total.toFixed(2)}`;
+  renderCartPreview();
+  updateCheckoutState();
+}
+
+function updateQuantity(id, delta){
+  const cart = getCart();
+  const item = cart.find(i=>i.id===id);
+  if(!item) return;
+  item.qty = Math.max(0, item.qty + Number(delta));
+  if(item.qty === 0){
+    const newCart = cart.filter(i=>i.id!==id); saveCart(newCart);
+  } else {
+    saveCart(cart);
+  }
+  renderCart();
+}
+
+function setQuantity(id, raw){
+  let qty = parseInt(raw, 10) || 0;
+  qty = Math.max(0, qty);
+  const cart = getCart();
+  const item = cart.find(i=>i.id===id);
+  if(!item) return;
+  if(qty === 0){
+    const newCart = cart.filter(i=>i.id!==id); saveCart(newCart);
+  } else {
+    item.qty = qty; saveCart(cart);
+  }
+  renderCart();
+}
+
+function updateCheckoutState(){
+  const link = document.getElementById('checkout-link');
+  const countEl = document.getElementById('cart-count');
+  const count = countEl ? parseInt(countEl.textContent) || 0 : 0;
+  if(!link) return;
+  if(count === 0){
+    link.style.backgroundColor = '#6c757d';
+    link.style.pointerEvents = 'none';
+    link.style.cursor = 'not-allowed';
+    link.title = 'Cart is empty';
+  } else {
+    link.style.backgroundColor = '';
+    link.style.pointerEvents = '';
+    link.style.cursor = '';
+    link.title = '';
+  }
 }
 
 function renderCartPreview(){
