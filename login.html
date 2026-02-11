@@ -25,6 +25,18 @@
 
         <div class="auth-form">
           <div style="margin-bottom:12px">
+            <label for="emailLogin">Email</label>
+            <input id="emailLogin" type="email" placeholder="you@example.com" />
+            <label for="passwordLogin">Password</label>
+            <input id="passwordLogin" type="password" placeholder="Your password" />
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button id="emailSignInBtn" class="primary">Sign in with Email</button>
+            </div>
+          </div>
+
+          <div style="margin:12px 0;text-align:center">— OR —</div>
+
+          <div style="margin-bottom:12px">
             <label for="phoneInput">Mobile Number</label>
             <input id="phoneInput" type="tel" placeholder="+91 9876543210" />
             <div style="display:flex;gap:8px;margin-top:8px">
@@ -33,8 +45,6 @@
             </div>
             <input id="otpInput" placeholder="Enter OTP" style="margin-top:8px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
           </div>
-
-          <div style="margin:18px 0;text-align:center">— OR —</div>
 
           <div style="display:flex;gap:8px;justify-content:center">
             <button id="googleSignIn" class="primary">Sign in with Google</button>
@@ -61,6 +71,14 @@
         const verifyBtn = document.getElementById('verifyOtpBtn');
         const otpInput = document.getElementById('otpInput');
         const googleBtn = document.getElementById('googleSignIn');
+
+        document.getElementById('emailSignInBtn').addEventListener('click', function(e){
+          e.preventDefault();
+          const email = document.getElementById('emailLogin').value.trim();
+          const pass = document.getElementById('passwordLogin').value.trim();
+          if(!email || !pass){ alert('Enter email and password'); return; }
+          window.appAuth.signInWithEmail(email, pass);
+        });
 
         sendBtn.addEventListener('click', function(e){
           e.preventDefault();

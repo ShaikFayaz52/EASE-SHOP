@@ -9,6 +9,8 @@
     signInWithGoogle: signInWithGoogle,
     sendPhoneOtpDev: sendPhoneOtpDev,
     verifyOtpDev: verifyOtpDev,
+    signInWithEmail: signInWithEmail,
+    createUserWithEmail: createUserWithEmail,
     signOut: signOut
   };
 
@@ -48,6 +50,32 @@
     const email = prompt('Enter your Gmail address for dev sign-in');
     if(!email) return;
     const user = { uid: 'dev-'+btoa(email).slice(0,8), displayName: email.split('@')[0], email };
+    localStorage.setItem('appUser', JSON.stringify(user));
+    window.location.href = 'profile.html';
+  }
+
+  // Email/password sign-in (supports Firebase or dev fallback)
+  async function signInWithEmail(email, password){
+    if(auth){
+      try{ await auth.signInWithEmailAndPassword(email, password); }
+      catch(e){ toast('Email sign-in failed: '+e.message); }
+      return;
+    }
+    // dev fallback: check stored dev user or allow sign-in if email matches last created
+    const u = JSON.parse(localStorage.getItem('appUser')||'null');
+    if(u && u.email === email){ localStorage.setItem('appUser', JSON.stringify(u)); window.location.href='profile.html'; }
+    else { toast('No dev user found. Please register first (dev mode).'); }
+  }
+
+  // Create account with email/password (Firebase or dev fallback)
+  async function createUserWithEmail(email, password){
+    if(auth){
+      try{ await auth.createUserWithEmailAndPassword(email, password); }
+      catch(e){ toast('Registration failed: '+e.message); }
+      return;
+    }
+    // dev fallback: create local user
+    const user = { uid: 'dev-email-'+btoa(email).slice(0,8), displayName: email.split('@')[0], email };
     localStorage.setItem('appUser', JSON.stringify(user));
     window.location.href = 'profile.html';
   }
