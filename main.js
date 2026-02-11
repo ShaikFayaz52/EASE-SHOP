@@ -118,47 +118,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if(document.getElementById('homeProducts')) renderHomeProducts();
   // start deals carousel simple rotation
   startDealsCarousel();
-  // attach global search if present
-  const search = document.getElementById('globalSearch');
-  if(search){
-    search.addEventListener('input', function(){ renderSearchResults(this.value); });
-  }
-  // create cart drawer container
-  if(!document.getElementById('cart-drawer')){
-    const drawer = document.createElement('div'); drawer.id='cart-drawer'; drawer.className='cart-drawer';
-    drawer.innerHTML = `
-      <div class="header"><strong>Your Cart</strong><button onclick="closeCartDrawer()">Close</button></div>
-      <div class="items" id="drawer-items"></div>
-      <div class="footer"><div style="display:flex;justify-content:space-between;align-items:center"><strong>Total:</strong><div id="drawer-total">₹0</div></div><div style="margin-top:10px;text-align:right"><a class="primary" href="checkout.html">Checkout</a></div></div>
-    `;
-    document.body.appendChild(drawer);
-    renderCartDrawer();
-  }
 });
-
-function renderCartDrawer(){
-  const itemsEl = document.getElementById('drawer-items'); if(!itemsEl) return;
-  const cart = getCart(); itemsEl.innerHTML='';
-  if(cart.length===0){ itemsEl.innerHTML = '<p>Your cart is empty.</p>'; document.getElementById('drawer-total').textContent='₹0'; return; }
-  cart.forEach(it=>{
-    const r = document.createElement('div'); r.style.display='flex'; r.style.gap='10px'; r.style.alignItems='center'; r.style.marginBottom='10px';
-    r.innerHTML = `<img src="${it.img}" style="width:56px;height:42px;object-fit:cover;border-radius:6px"><div style="flex:1"><div style="font-weight:600">${it.title}</div><div style="font-size:13px">${it.qty} × ₹${it.price}</div></div><div>₹${(it.price*it.qty).toFixed(2)}</div>`;
-    itemsEl.appendChild(r);
-  });
-  const total = cart.reduce((s,i)=>s+i.price*i.qty,0); document.getElementById('drawer-total').textContent = `₹${total.toFixed(2)}`;
-}
-
-function openCartDrawer(){ document.getElementById('cart-drawer').classList.add('open'); renderCartDrawer(); }
-function closeCartDrawer(){ document.getElementById('cart-drawer').classList.remove('open'); }
-
-function renderSearchResults(q){
-  const container = document.getElementById('homeProducts') || document.getElementById('productGrid');
-  if(!container) return;
-  const term = (q||'').trim().toLowerCase();
-  if(!term){ renderHomeProducts(); return; }
-  const list = PRODUCT_CATALOG.filter(p=>p.title.toLowerCase().includes(term) || (p.category||'').toLowerCase().includes(term));
-  container.innerHTML=''; list.forEach(p=> container.appendChild(createProductCard(p)));
-}
 
 // Sample product catalog used on homepage
 const PRODUCT_CATALOG = [
