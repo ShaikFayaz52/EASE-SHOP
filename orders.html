@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orders — ShopEase</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div>
+      <h1 class="logo">ShopEase</h1>
+      <div class="muted" style="font-size:13px">New Orders</div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="orders.html">Orders</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="login.html">Account</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h2>Recent Orders</h2>
+    <div id="ordersContainer" class="orders-list">
+      <!-- Orders injected by script -->
+    </div>
+
+    <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end">
+      <button id="createSample">Create sample order</button>
+      <button id="clearOrders">Clear orders</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div>&copy; 2025 ShopEase. All rights reserved.</div>
+    <div style="margin-top:6px">support@fayazshopping.com</div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    function formatDate(ts){ const d=new Date(ts); return d.toLocaleString(); }
+
+    function renderOrders(){
+      const container = document.getElementById('ordersContainer');
+      const list = JSON.parse(localStorage.getItem('orders')||'[]');
+      container.innerHTML = '';
+      if(!list.length){ container.innerHTML = '<p class="muted">No orders yet.</p>'; return; }
+      list.slice().reverse().forEach(o=>{
+        const el = document.createElement('div'); el.className='order-card';
+        el.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><strong>Order #${o.id}</strong><div class="muted" style="font-size:13px">${formatDate(o.date)}</div></div>
+            <div style="text-align:right">Items: ${o.items.length}<div style="font-weight:700;margin-top:6px">Total: ₹${o.total.toFixed(2)}</div></div>
+          </div>
+          <details style="margin-top:8px"><summary>View items</summary>
+            <ul style="margin:8px 0 0 16px">${o.items.map(i=>`<li>${i.title} × ${i.qty} — ₹${(i.price*i.qty).toFixed(2)}</li>`).join('')}</ul>
+          </details>
+        `;
+        container.appendChild(el);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      renderOrders();
+      document.getElementById('createSample').addEventListener('click', ()=>{
+        const sample = {
+          id: Math.floor(Math.random()*900000)+100000,
+          date: Date.now(),
+          items: [ { id:'p1', title:'Sample Product', price:999, qty:1 } ],
+          total: 999
+        };
+        const arr = JSON.parse(localStorage.getItem('orders')||'[]'); arr.push(sample); localStorage.setItem('orders', JSON.stringify(arr)); renderOrders();
+      });
+      document.getElementById('clearOrders').addEventListener('click', ()=>{ localStorage.removeItem('orders'); renderOrders(); });
+    });
+  </script>
+</body>
+</html>
