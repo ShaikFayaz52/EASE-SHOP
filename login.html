@@ -19,38 +19,53 @@
     </header>
 
     <main class="page">
-      <section class="auth-panel">
-        <h2>Sign in</h2>
-        <p class="muted center">Use phone number or Gmail to sign in</p>
-
-        <div class="auth-form">
-          <div style="margin-bottom:12px">
-            <label for="emailLogin">Email</label>
-            <input id="emailLogin" type="email" placeholder="you@example.com" />
-            <label for="passwordLogin">Password</label>
-            <input id="passwordLogin" type="password" placeholder="Your password" />
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button id="emailSignInBtn" class="primary">Sign in with Email</button>
+      <section class="hero-card" style="margin-top:8px;">
+        <div class="hero-left">
+          <span class="kicker">Welcome back</span>
+          <h2>Sign in to ShopEase</h2>
+          <p class="muted">Fast checkout, order tracking, and exclusive deals. Sign in to continue shopping.</p>
+          <ul style="margin-top:14px;line-height:1.6;color:#374151">
+            <li>Save multiple addresses</li>
+            <li>View order history & tracking</li>
+            <li>Secure payments & quick returns</li>
+          </ul>
+        </div>
+        <div class="hero-right" style="background:linear-gradient(180deg,#fff,#f7fbff);color:#0f172a;box-shadow:none;align-items:flex-start;padding:20px;">
+          <div class="auth-form" style="max-width:360px;width:100%;">
+            <h2 style="text-align:left;margin-bottom:6px;color:#0f172a;">Sign in</h2>
+            <div style="display:flex;gap:8px;margin-bottom:12px">
+              <button id="tabEmail" class="text-button" style="flex:1">Email</button>
+              <button id="tabPhone" class="text-button" style="flex:1">Phone</button>
             </div>
-          </div>
 
-          <div style="margin:12px 0;text-align:center">— OR —</div>
+            <form id="emailForm" onsubmit="return false;">
+              <label for="emailLogin">Email</label>
+              <input id="emailLogin" type="email" placeholder="you@example.com" />
+              <label for="passwordLogin">Password</label>
+              <input id="passwordLogin" type="password" placeholder="Your password" />
+              <div class="form-actions">
+                <a href="#" class="text-button">Forgot?</a>
+                <button id="emailSignInBtn" class="primary">Sign in</button>
+              </div>
+            </form>
 
-          <div style="margin-bottom:12px">
-            <label for="phoneInput">Mobile Number</label>
-            <input id="phoneInput" type="tel" placeholder="+91 9876543210" />
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button id="sendOtpBtn" class="primary">Send OTP</button>
-              <button id="verifyOtpBtn" class="primary" style="display:none">Verify OTP</button>
+            <form id="phoneForm" onsubmit="return false;" style="display:none;">
+              <label for="phoneInput">Mobile Number</label>
+              <input id="phoneInput" type="tel" placeholder="+91 98765 43210" />
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button id="sendOtpBtn" class="primary">Send OTP</button>
+                <button id="verifyOtpBtn" class="primary" style="display:none">Verify</button>
+              </div>
+              <input id="otpInput" placeholder="Enter OTP" class="otp-input" style="margin-top:10px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
+            </form>
+
+            <div style="text-align:center;margin:12px 0;color:#6b7280">— or continue with —</div>
+            <div style="display:flex;gap:10px;justify-content:center">
+              <button id="googleSignIn" class="primary">Google</button>
             </div>
-            <input id="otpInput" placeholder="Enter OTP" style="margin-top:8px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
-          </div>
 
-          <div style="display:flex;gap:8px;justify-content:center">
-            <button id="googleSignIn" class="primary">Sign in with Google</button>
+            <p style="text-align:center;margin-top:14px;color:#475569">New to ShopEase? <a href="register.html">Create an account</a></p>
           </div>
-
-          <p class="center" style="margin-top:12px">Don't have an account? <a href="register.html">Register</a></p>
         </div>
       </section>
     </main>
@@ -71,6 +86,15 @@
         const verifyBtn = document.getElementById('verifyOtpBtn');
         const otpInput = document.getElementById('otpInput');
         const googleBtn = document.getElementById('googleSignIn');
+        const tabEmail = document.getElementById('tabEmail');
+        const tabPhone = document.getElementById('tabPhone');
+        const emailForm = document.getElementById('emailForm');
+        const phoneForm = document.getElementById('phoneForm');
+
+        function showEmail(){ emailForm.style.display='block'; phoneForm.style.display='none'; }
+        function showPhone(){ emailForm.style.display='none'; phoneForm.style.display='block'; }
+        tabEmail.addEventListener('click', showEmail);
+        tabPhone.addEventListener('click', showPhone);
 
         document.getElementById('emailSignInBtn').addEventListener('click', function(e){
           e.preventDefault();
@@ -80,20 +104,21 @@
           window.appAuth.signInWithEmail(email, pass);
         });
 
+        // allow pressing Enter on email form
+        emailForm.addEventListener('submit', function(e){ e.preventDefault(); document.getElementById('emailSignInBtn').click(); });
+        phoneForm.addEventListener('submit', function(e){ e.preventDefault(); sendBtn.click(); });
+
         sendBtn.addEventListener('click', function(e){
           e.preventDefault();
           const phone = phoneInput.value.trim();
           if(!phone){ alert('Enter phone number'); return; }
-          // If Firebase available, use signInWithPhoneNumber flow (requires reCAPTCHA and config)
           if(window.FIREBASE_CONFIG && window.firebase && firebase.auth){
-            // set up invisible reCAPTCHA
             window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sendOtpBtn', { size: 'invisible' });
             firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
               .then(confirmationResult => { window.confirmationResult = confirmationResult; alert('OTP sent'); verifyBtn.style.display='inline-block'; })
               .catch(err => alert('Failed to send OTP: '+err.message));
             return;
           }
-          // dev fallback
           window.appAuth.sendPhoneOtpDev(phone).then(()=>{ verifyBtn.style.display='inline-block'; });
         });
 

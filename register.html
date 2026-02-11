@@ -23,39 +23,49 @@
   </header>
 
   <main class="page">
-    <section class="auth-panel">
-      <h2>Create account</h2>
-      <p class="muted center">Join ShopEase for faster checkout and order tracking</p>
-      <div class="auth-form">
-        <div style="margin-bottom:12px">
-          <label for="regName">Full name</label>
-          <input id="regName" type="text" placeholder="Your name" />
-          <label for="regEmail">Email</label>
-          <input id="regEmail" type="email" placeholder="you@example.com" />
-          <label for="regPassword">Password</label>
-          <input id="regPassword" type="password" placeholder="Create password" />
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button id="createEmailBtn" class="primary">Create Account (Email)</button>
+    <section class="hero-card" style="margin-top:8px;">
+      <div class="hero-left">
+        <span class="kicker">Join ShopEase</span>
+        <h2>Create your account</h2>
+        <p class="muted">Sign up to save addresses, track orders and get exclusive deals.</p>
+        <ul style="margin-top:14px;line-height:1.6;color:#374151">
+          <li>Secure payments</li>
+          <li>Faster checkout</li>
+          <li>Personalized recommendations</li>
+        </ul>
+      </div>
+      <div class="hero-right" style="background:linear-gradient(180deg,#fff,#f7fbff);color:#0f172a;box-shadow:none;align-items:flex-start;padding:20px;">
+        <div class="auth-form" style="max-width:360px;width:100%;">
+          <h2 style="text-align:left;margin-bottom:6px;color:#0f172a;">Create account</h2>
+          <form id="createEmailForm" onsubmit="return false;">
+            <label for="regName">Full name</label>
+            <input id="regName" type="text" placeholder="Your name" />
+            <label for="regEmail">Email</label>
+            <input id="regEmail" type="email" placeholder="you@example.com" />
+            <label for="regPassword">Password</label>
+            <input id="regPassword" type="password" placeholder="Create password" />
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button id="createEmailBtn" class="primary">Create account</button>
+            </div>
+          </form>
+
+          <div style="text-align:center;margin:12px 0;color:#6b7280">— or sign up with —</div>
+          <div style="display:flex;gap:10px;justify-content:center">
+            <button id="regGoogle" class="primary">Google</button>
           </div>
-        </div>
 
-        <div style="margin:12px 0;text-align:center">— OR —</div>
-
-        <div style="margin-bottom:12px">
-          <label for="regPhone">Mobile Number</label>
-          <input id="regPhone" type="tel" placeholder="+91 9876543210" />
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button id="regSendOtp" class="primary">Send OTP</button>
-            <button id="regVerifyOtp" class="primary" style="display:none">Verify OTP</button>
+          <div style="margin-top:12px;border-top:1px solid #eef2f7;padding-top:12px">
+            <label for="regPhone">Mobile Number</label>
+            <input id="regPhone" type="tel" placeholder="+91 98765 43210" />
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button id="regSendOtp" class="primary">Send OTP</button>
+              <button id="regVerifyOtp" class="primary" style="display:none">Verify</button>
+            </div>
+            <input id="regOtpInput" placeholder="Enter OTP" class="otp-input" style="margin-top:10px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
           </div>
-          <input id="regOtpInput" placeholder="Enter OTP" style="margin-top:8px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
-        </div>
 
-        <div style="display:flex;gap:8px;justify-content:center">
-          <button id="regGoogle" class="primary">Sign up with Google</button>
+          <p style="text-align:center;margin-top:14px;color:#475569">Already have an account? <a href="login.html">Sign in</a></p>
         </div>
-
-        <p class="center" style="margin-top:12px">Already have an account? <a href="login.html">Login</a></p>
       </div>
     </section>
   </main>
@@ -71,19 +81,44 @@
   <script src="auth.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function(){
-      document.getElementById('createEmailBtn').addEventListener('click', function(){
+      const createBtn = document.getElementById('createEmailBtn');
+      const createForm = document.getElementById('createEmailForm');
+      createBtn.addEventListener('click', function(){
         const email = document.getElementById('regEmail').value.trim();
         const pass = document.getElementById('regPassword').value.trim();
         if(!email || !pass) { alert('Enter email and password'); return; }
         window.appAuth.createUserWithEmail(email, pass);
       });
+      createForm.addEventListener('submit', function(e){ e.preventDefault(); createBtn.click(); });
 
       document.getElementById('regGoogle').addEventListener('click', function(){ window.appAuth.signInWithGoogle(); });
 
       const send = document.getElementById('regSendOtp');
       const verify = document.getElementById('regVerifyOtp');
-      send.addEventListener('click', function(e){ e.preventDefault(); const phone = document.getElementById('regPhone').value.trim(); if(!phone){alert('Enter phone');return;} window.appAuth.sendPhoneOtpDev(phone).then(()=>{ verify.style.display='inline-block'; }); });
-      verify.addEventListener('click', function(e){ e.preventDefault(); const phone = document.getElementById('regPhone').value.trim(); const code = document.getElementById('regOtpInput').value.trim(); const ok = window.appAuth.verifyOtpDev(phone, code); if(!ok) alert('Invalid OTP'); });
+      send.addEventListener('click', function(e){
+        e.preventDefault();
+        const phone = document.getElementById('regPhone').value.trim();
+        if(!phone){ alert('Enter phone'); return; }
+        if(window.FIREBASE_CONFIG && window.firebase && firebase.auth){
+          window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('regSendOtp', { size: 'invisible' });
+          firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
+            .then(confirmationResult => { window.confirmationResult = confirmationResult; alert('OTP sent'); verify.style.display='inline-block'; })
+            .catch(err => alert('Failed to send OTP: '+err.message));
+          return;
+        }
+        window.appAuth.sendPhoneOtpDev(phone).then(()=>{ verify.style.display='inline-block'; });
+      });
+      verify.addEventListener('click', function(e){
+        e.preventDefault();
+        const phone = document.getElementById('regPhone').value.trim();
+        const code = document.getElementById('regOtpInput').value.trim();
+        if(window.FIREBASE_CONFIG && window.firebase && window.confirmationResult){
+          window.confirmationResult.confirm(code).then(result=>{ window.location.href='profile.html'; }).catch(err=>alert('Invalid code'));
+          return;
+        }
+        const ok = window.appAuth.verifyOtpDev(phone, code);
+        if(!ok) alert('Invalid OTP');
+      });
     });
   </script>
 </body>
