@@ -1,12 +1,21 @@
-// Paste your Firebase config here to enable real authentication.
-// Example:
-// window.FIREBASE_CONFIG = {
-//   apiKey: "...",
-//   authDomain: "your-project.firebaseapp.com",
-//   projectId: "your-project-id",
-//   storageBucket: "your-project.appspot.com",
-//   messagingSenderId: "...",
-//   appId: "..."
-// };
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Leave this file as-is for a dev fallback (no real SMS/email will be sent).
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAXpy5S3yi7v38CgpWcv_whcXk-xApSJNo",
+  authDomain: "ease-shop-4bc31.firebaseapp.com",
+  projectId: "ease-shop-4bc31",
+  storageBucket: "ease-shop-4bc31.firebasestorage.app",
+  messagingSenderId: "161952554120",
+  appId: "1:161952554120:web:cec12977df3d3225bc533d",
+  measurementId: "G-KJE4GRJCY2"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
