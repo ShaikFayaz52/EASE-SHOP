@@ -1,36 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Register Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register — ShopEase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <title>Register</title>
-    <link rel="stylesheet" href="styles.css">
-    <h2>Register</h2>
+  <header class="site-header">
+    <div>
+      <h1 class="logo">ShopEase</h1>
+      <div class="muted" style="font-size:13px">Create your account</div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
 
-    <form>
-        <label>Full Name:</label><br>
-        <input type="text" placeholder="Enter your name"><br><br>
+  <main class="page">
+    <section class="auth-panel">
+      <h2>Create account</h2>
+      <p class="muted center">Join ShopEase for faster checkout and order tracking</p>
+      <form action="index.html" class="auth-form" novalidate>
+        <label for="fullname">Full name</label>
+        <input id="fullname" name="fullname" type="text" placeholder="Your name" required>
 
-        <label>Email:</label><br>
-        <input type="email" placeholder="Enter your email"><br><br>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
 
-        <label>Mobile Number:</label><br>
-        <input type="tel" placeholder="Enter mobile number"><br><br>
+        <label for="mobile">Mobile Number</label>
+        <input id="mobile" name="mobile" type="tel" placeholder="9876543210" required>
 
-        <label>Password:</label><br>
-        <input type="password" placeholder="Create password"><br><br>
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" placeholder="Create password" required>
 
-        <label>Confirm Password:</label><br>
-        <input type="password" placeholder="Confirm password"><br><br>
+        <label for="confirm">Confirm Password</label>
+        <input id="confirm" name="confirm" type="password" placeholder="Confirm password" required>
 
-        <input type="submit" value="Register">
-    </form>
+        <div class="form-actions">
+          <a class="text-button" href="login.html">Already have an account?</a>
+          <input type="submit" value="Register" class="primary">
+        </div>
+      </form>
+    </section>
+  </main>
 
-    <p>Already have an account?
-        <a href="login.html">Login here</a>
-    </p>
-
+  <footer class="site-footer">
+    <div>&copy; 2025 ShopEase. All rights reserved.</div>
+    <div style="margin-top:6px">support@fayazshopping.com</div>
+  </footer>
 </body>
 </html>

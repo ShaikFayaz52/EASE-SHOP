@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Order Successful</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Order Successful — ShopEase</title>
+        <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="site-header">
+        <div>
+            <h1 class="logo">ShopEase</h1>
+            <div class="muted" style="font-size:13px">Thanks for your order</div>
+        </div>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+            <a href="login.html">Account</a>
+        </nav>
+    </header>
 
-    <div class="container">
-        <h2>Order Placed Successfully 🎉</h2>
-        <p>Thank you for shopping with us.</p>
+    <main class="page">
+        <div class="container">
+            <h2>Order Placed Successfully 🎉</h2>
+            <p>Thank you for shopping with us. We'll send an order confirmation to your email shortly.</p>
+            <div style="margin-top:12px">
+                <a class="primary" href="index.html">Continue Shopping</a>
+                <a style="margin-left:10px" href="orders.html">View Orders</a>
+            </div>
+        </div>
+    </main>
 
-        <a href="index.html">Go to Home</a>
-    </div>
-
+    <footer class="site-footer">
+        <div>&copy; 2025 ShopEase. All rights reserved.</div>
+        <div style="margin-top:6px">support@fayazshopping.com</div>
+    </footer>
 </body>
 </html>
