@@ -1,40 +1,455 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Order Successful — ShopEase</title>
-        <link rel="stylesheet" href="styles.css">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Order Success | ShopEase</title>
+
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+
+<style>
+
+body{
+
+  margin:0;
+
+  padding:0;
+
+  background:#f4f7fb;
+
+  font-family:'Poppins',sans-serif;
+
+}
+
+
+.success-page{
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:20px;
+
+}
+
+
+.success-container{
+
+  min-height:80vh;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+}
+
+
+.success-card{
+
+  background:white;
+
+  width:100%;
+
+  max-width:650px;
+
+  padding:50px;
+
+  border-radius:28px;
+
+  text-align:center;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+.success-icon{
+
+  width:120px;
+
+  height:120px;
+
+  margin:auto;
+
+  border-radius:50%;
+
+  background:#10b981;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  color:white;
+
+  font-size:60px;
+
+  margin-bottom:30px;
+
+}
+
+
+.success-title{
+
+  font-size:38px;
+
+  font-weight:700;
+
+  color:#111827;
+
+  margin-bottom:18px;
+
+}
+
+
+.success-text{
+
+  color:#6b7280;
+
+  font-size:18px;
+
+  line-height:1.7;
+
+  margin-bottom:35px;
+
+}
+
+
+.order-info{
+
+  background:#f9fafb;
+
+  padding:20px;
+
+  border-radius:16px;
+
+  margin-bottom:35px;
+
+}
+
+
+.order-info p{
+
+  margin:10px 0;
+
+  color:#374151;
+
+}
+
+
+.button-group{
+
+  display:flex;
+
+  gap:15px;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+}
+
+
+.shop-btn{
+
+  background:#0ea5e9;
+
+  color:white;
+
+  text-decoration:none;
+
+  padding:14px 24px;
+
+  border-radius:14px;
+
+  font-weight:700;
+
+}
+
+
+.orders-btn{
+
+  background:#10b981;
+
+  color:white;
+
+  text-decoration:none;
+
+  padding:14px 24px;
+
+  border-radius:14px;
+
+  font-weight:700;
+
+}
+
+
+.shop-btn:hover,
+.orders-btn:hover{
+
+  opacity:0.9;
+
+}
+
+
+@media(max-width:768px){
+
+  .success-card{
+
+    padding:30px;
+
+  }
+
+
+  .success-title{
+
+    font-size:30px;
+
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
-    <header class="site-header">
-        <div>
-            <h1 class="logo">ShopEase</h1>
-            <div class="muted" style="font-size:13px">Thanks for your order</div>
-        </div>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="orders.html">Orders</a>
-            <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-            <a href="login.html">Account</a>
-        </nav>
-    </header>
 
-    <main class="page">
-        <div class="container">
-            <h2>Order Placed Successfully 🎉</h2>
-            <p>Thank you for shopping with us. We'll send an order confirmation to your email shortly.</p>
-            <div style="margin-top:12px">
-                <a class="primary" href="index.html">Continue Shopping</a>
-                <a style="margin-left:10px" href="orders.html">View Orders</a>
-            </div>
-        </div>
-    </main>
 
-    <footer class="site-footer">
-        <div>&copy; 2025 ShopEase. All rights reserved.</div>
-        <div style="margin-top:6px">support@fayazshopping.com</div>
-    </footer>
+
+
+
+<div class="success-page">
+
+
+
+
+
+<header class="site-header">
+
+  <div>
+
+    <h1 class="logo">
+      ShopEase
+    </h1>
+
+    <div
+      class="muted"
+      style="font-size:13px"
+    >
+      Order Successful
+    </div>
+
+  </div>
+
+
+
+  <nav class="nav">
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="products.html">
+      Products
+    </a>
+
+    <a href="orders.html">
+      Orders
+    </a>
+
+    <a href="cart.html">
+      Cart
+      (
+      <span id="cart-count">
+        0
+      </span>
+      )
+    </a>
+
+    <a href="profile.html">
+      Profile
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+
+
+
+
+
+<div class="success-container">
+
+
+
+
+<div class="success-card">
+
+
+
+
+<div class="success-icon">
+
+  ✓
+
+</div>
+
+
+
+
+
+<div class="success-title">
+
+  Order Placed Successfully
+
+</div>
+
+
+
+
+
+<div class="success-text">
+
+  Thank you for shopping with ShopEase.
+
+  Your order has been placed successfully
+  and will be processed shortly.
+
+</div>
+
+
+
+
+
+
+<div class="order-info">
+
+  <p>
+
+    📦 Your products are being prepared
+
+  </p>
+
+  <p>
+
+    🚚 Expected delivery:
+    3 - 5 business days
+
+  </p>
+
+  <p>
+
+    💳 Payment received successfully
+
+  </p>
+
+</div>
+
+
+
+
+
+
+
+<div class="button-group">
+
+  <a
+    href="index.html"
+    class="shop-btn"
+  >
+
+    Continue Shopping
+
+  </a>
+
+
+
+
+
+  <a
+    href="orders.html"
+    class="orders-btn"
+  >
+
+    View Orders
+
+  </a>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+<footer class="site-footer">
+
+  <div>
+    &copy; 2025 ShopEase.
+    All rights reserved.
+  </div>
+
+  <div style="margin-top:6px">
+    support@shopease.com
+  </div>
+
+</footer>
+
+</div>
+
+
+
+
+
+
+
+<script>
+
+const cartCount =
+  document.getElementById(
+    'cart-count'
+  );
+
+
+if(cartCount){
+
+  cartCount.innerText = 0;
+
+}
+
+</script>
+
+
 </body>
 </html>

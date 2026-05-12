@@ -1,142 +1,800 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Login — ShopEase</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Login | ShopEase</title>
+
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+
+<style>
+
+body{
+
+  margin:0;
+
+  padding:0;
+
+  background:#f4f7fb;
+
+  font-family:'Poppins',sans-serif;
+
+}
+
+
+.login-page{
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:20px;
+
+}
+
+
+.login-container{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:40px;
+
+  align-items:center;
+
+  margin-top:40px;
+
+}
+
+
+.login-left{
+
+  padding:20px;
+
+}
+
+
+.login-left h1{
+
+  font-size:48px;
+
+  color:#111827;
+
+  margin-bottom:20px;
+
+}
+
+
+.login-left p{
+
+  font-size:18px;
+
+  color:#6b7280;
+
+  line-height:1.7;
+
+}
+
+
+.feature-list{
+
+  margin-top:30px;
+
+}
+
+
+.feature-item{
+
+  margin-bottom:15px;
+
+  color:#374151;
+
+}
+
+
+.login-card{
+
+  background:white;
+
+  padding:40px;
+
+  border-radius:24px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+.login-title{
+
+  font-size:32px;
+
+  font-weight:700;
+
+  color:#111827;
+
+  margin-bottom:10px;
+
+}
+
+
+.login-subtitle{
+
+  color:#6b7280;
+
+  margin-bottom:30px;
+
+}
+
+
+.form-group{
+
+  margin-bottom:20px;
+
+}
+
+
+.form-group label{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  font-weight:600;
+
+  color:#374151;
+
+}
+
+
+.form-group input{
+
+  width:100%;
+
+  padding:14px;
+
+  border:1px solid #d1d5db;
+
+  border-radius:14px;
+
+  font-size:15px;
+
+  outline:none;
+
+}
+
+
+.form-group input:focus{
+
+  border-color:#0ea5e9;
+
+}
+
+
+.login-btn{
+
+  width:100%;
+
+  background:#0ea5e9;
+
+  color:white;
+
+  border:none;
+
+  padding:15px;
+
+  border-radius:14px;
+
+  font-size:17px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+
+.login-btn:hover{
+
+  opacity:0.9;
+
+}
+
+
+.divider{
+
+  text-align:center;
+
+  margin:25px 0;
+
+  color:#6b7280;
+
+}
+
+
+.google-btn{
+
+  width:100%;
+
+  background:white;
+
+  color:#111827;
+
+  border:1px solid #d1d5db;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  font-size:16px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+}
+
+
+.google-btn:hover{
+
+  background:#f9fafb;
+
+}
+
+
+.register-link{
+
+  margin-top:25px;
+
+  text-align:center;
+
+  color:#6b7280;
+
+}
+
+
+.register-link a{
+
+  color:#0ea5e9;
+
+  text-decoration:none;
+
+  font-weight:600;
+
+}
+
+
+@media(max-width:900px){
+
+  .login-container{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .login-left{
+
+    text-align:center;
+
+  }
+
+
+  .login-left h1{
+
+    font-size:36px;
+
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
-    <header class="page site-header">
-      <h1 class="logo">ShopEase</h1>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="products.html">Products</a>
-        <a href="orders.html">Orders</a>
-        <a href="cart.html">Cart</a>
-        <a href="login.html">Login</a>
-      </nav>
-    </header>
 
-    <main class="page">
-      <section class="hero-card" style="margin-top:8px;">
-        <div class="hero-left">
-          <span class="kicker">Welcome back</span>
-          <h2>Sign in to ShopEase</h2>
-          <p class="muted">Fast checkout, order tracking, and exclusive deals. Sign in to continue shopping.</p>
-          <ul style="margin-top:14px;line-height:1.6;color:#374151">
-            <li>Save multiple addresses</li>
-            <li>View order history & tracking</li>
-            <li>Secure payments & quick returns</li>
-          </ul>
-        </div>
-        <div class="hero-right" style="background:linear-gradient(180deg,#fff,#f7fbff);color:#0f172a;box-shadow:none;align-items:flex-start;padding:20px;">
-          <div class="auth-form" style="max-width:360px;width:100%;">
-            <h2 style="text-align:left;margin-bottom:6px;color:#0f172a;">Sign in</h2>
-            <div style="display:flex;gap:8px;margin-bottom:12px">
-              <button id="tabEmail" class="text-button" style="flex:1">Email</button>
-              <button id="tabPhone" class="text-button" style="flex:1">Phone</button>
-            </div>
 
-            <form id="emailForm" onsubmit="return false;">
-              <label for="emailLogin">Email</label>
-              <input id="emailLogin" type="email" placeholder="you@example.com" />
-              <label for="passwordLogin">Password</label>
-              <input id="passwordLogin" type="password" placeholder="Your password" />
-              <div class="form-actions">
-                <a href="#" class="text-button">Forgot?</a>
-                <button id="emailSignInBtn" class="primary">Sign in</button>
-              </div>
-            </form>
 
-            <form id="phoneForm" onsubmit="return false;" style="display:none;">
-              <label for="phoneInput">Mobile Number</label>
-              <input id="phoneInput" type="tel" placeholder="+91 98765 43210" />
-              <div style="display:flex;gap:8px;margin-top:8px">
-                <button id="sendOtpBtn" class="primary">Send OTP</button>
-                <button id="verifyOtpBtn" class="primary" style="display:none">Verify</button>
-              </div>
-              <input id="otpInput" placeholder="Enter OTP" class="otp-input" style="margin-top:10px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
-            </form>
 
-            <div style="text-align:center;margin:12px 0;color:#6b7280">— or continue with —</div>
-            <div style="display:flex;gap:10px;justify-content:center">
-              <button id="googleSignIn" class="primary">Google</button>
-            </div>
 
-            <p style="text-align:center;margin-top:14px;color:#475569">New to ShopEase? <a href="register.html">Create an account</a></p>
-          </div>
-        </div>
-      </section>
-    </main>
+<div class="login-page">
 
-    <footer class="page site-footer">
-      <p>&copy; 2025 ShopEase. All rights reserved.</p>
-    </footer>
 
-    <!-- Firebase SDK: optional. If you want real SMS/email delivery, paste your config into `firebase-config.js` and include these scripts. -->
-    <script src="firebase-config.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-    <script src="auth.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function(){
-        const phoneInput = document.getElementById('phoneInput');
-        const sendBtn = document.getElementById('sendOtpBtn');
-        const verifyBtn = document.getElementById('verifyOtpBtn');
-        const otpInput = document.getElementById('otpInput');
-        const googleBtn = document.getElementById('googleSignIn');
-        const tabEmail = document.getElementById('tabEmail');
-        const tabPhone = document.getElementById('tabPhone');
-        const emailForm = document.getElementById('emailForm');
-        const phoneForm = document.getElementById('phoneForm');
 
-        function showEmail(){ emailForm.style.display='block'; phoneForm.style.display='none'; }
-        function showPhone(){ emailForm.style.display='none'; phoneForm.style.display='block'; }
-        tabEmail.addEventListener('click', showEmail);
-        tabPhone.addEventListener('click', showPhone);
 
-        document.getElementById('emailSignInBtn').addEventListener('click', function(e){
-          e.preventDefault();
-          const email = document.getElementById('emailLogin').value.trim();
-          const pass = document.getElementById('passwordLogin').value.trim();
-          if(!email || !pass){ alert('Enter email and password'); return; }
-          window.appAuth.signInWithEmail(email, pass);
-        });
 
-        // allow pressing Enter on email form
-        emailForm.addEventListener('submit', function(e){ e.preventDefault(); document.getElementById('emailSignInBtn').click(); });
-        phoneForm.addEventListener('submit', function(e){ e.preventDefault(); sendBtn.click(); });
+<header class="site-header">
 
-        sendBtn.addEventListener('click', function(e){
-          e.preventDefault();
-          const phone = phoneInput.value.trim();
-          if(!phone){ alert('Enter phone number'); return; }
-          if(window.FIREBASE_CONFIG && window.firebase && firebase.auth){
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sendOtpBtn', { size: 'invisible' });
-            firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
-              .then(confirmationResult => { window.confirmationResult = confirmationResult; alert('OTP sent'); verifyBtn.style.display='inline-block'; })
-              .catch(err => alert('Failed to send OTP: '+err.message));
-            return;
-          }
-          window.appAuth.sendPhoneOtpDev(phone).then(()=>{ verifyBtn.style.display='inline-block'; });
-        });
+  <div>
 
-        verifyBtn.addEventListener('click', function(e){
-          e.preventDefault();
-          const phone = phoneInput.value.trim();
-          const code = otpInput.value.trim();
-          if(window.FIREBASE_CONFIG && window.firebase && window.confirmationResult){
-            window.confirmationResult.confirm(code).then(result=>{ window.location.href='profile.html'; }).catch(err=>alert('Invalid code'));
-            return;
-          }
-          const ok = window.appAuth.verifyOtpDev(phone, code);
-          if(!ok) alert('Invalid OTP');
-        });
+    <h1 class="logo">
+      ShopEase
+    </h1>
 
-        googleBtn.addEventListener('click', function(e){ e.preventDefault(); window.appAuth.signInWithGoogle(); });
-      });
-    </script>
+    <div
+      class="muted"
+      style="font-size:13px"
+    >
+      Secure Login
+    </div>
+
+  </div>
+
+
+
+  <nav class="nav">
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="products.html">
+      Products
+    </a>
+
+    <a href="orders.html">
+      Orders
+    </a>
+
+    <a href="cart.html">
+      Cart
+    </a>
+
+    <a href="login.html">
+      Login
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+
+
+
+
+
+<div class="login-container">
+
+
+
+
+<div class="login-left">
+
+  <h1>
+
+    Welcome Back
+
+  </h1>
+
+
+
+
+  <p>
+
+    Login to continue shopping,
+    selling products,
+    or managing your platform.
+
+  </p>
+
+
+
+
+
+  <div class="feature-list">
+
+    <div class="feature-item">
+      ✓ Secure Authentication
+    </div>
+
+    <div class="feature-item">
+      ✓ Customer Dashboard
+    </div>
+
+    <div class="feature-item">
+      ✓ Seller Dashboard
+    </div>
+
+    <div class="feature-item">
+      ✓ Admin Control Panel
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="login-card">
+
+  <div class="login-title">
+
+    Sign In
+
+  </div>
+
+
+
+  <div class="login-subtitle">
+
+    Login to your account
+
+  </div>
+
+
+
+
+
+
+  <form id="loginForm">
+
+
+
+
+
+    <div class="form-group">
+
+      <label>
+        Email Address
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        required
+      >
+
+    </div>
+
+
+
+
+
+
+    <div class="form-group">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+        required
+      >
+
+    </div>
+
+
+
+
+
+
+    <button
+      type="submit"
+      class="login-btn"
+    >
+
+      Login
+
+    </button>
+
+  </form>
+
+
+
+
+
+
+
+  <div class="divider">
+
+    OR
+
+  </div>
+
+
+
+
+
+
+
+  <button
+    class="google-btn"
+    id="googleLoginBtn"
+  >
+
+    Continue with Google
+
+  </button>
+
+
+
+
+
+
+
+  <div class="register-link">
+
+    Don't have an account?
+
+    <a href="register.html">
+
+      Create Account
+
+    </a>
+
+  </div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<footer class="site-footer">
+
+  <div>
+    &copy; 2025 ShopEase.
+    All rights reserved.
+  </div>
+
+</footer>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script type="module">
+
+import {
+  loginUser,
+  googleLogin
+} from './auth.js';
+
+import {
+  supabase
+} from './supabase.js';
+
+
+
+
+// LOGIN
+document
+.getElementById('loginForm')
+.addEventListener('submit',
+
+async (e)=>{
+
+  e.preventDefault();
+
+
+
+
+  const email =
+    document.getElementById(
+      'email'
+    ).value;
+
+
+
+
+  const password =
+    document.getElementById(
+      'password'
+    ).value;
+
+
+
+
+
+  const user =
+    await loginUser(
+      email,
+      password
+    );
+
+
+
+
+  if(!user) return;
+
+
+
+
+
+  // GET PROFILE
+  const {
+    data: profile,
+    error
+  } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
+
+
+
+
+  if(error){
+
+    console.log(error);
+
+    alert('Profile not found');
+
+    return;
+
+  }
+
+
+
+
+  // CHECK BANNED
+  if(profile.banned){
+
+    alert('Your account has been banned');
+
+    return;
+
+  }
+
+
+
+
+
+
+  // REDIRECT BASED ON ROLE
+  if(profile.role === 'seller'){
+
+    window.location.href =
+      'seller-dashboard.html';
+
+  }
+  else if(profile.role === 'admin'){
+
+    window.location.href =
+      'admin-dashboard.html';
+
+  }
+  else{
+
+    window.location.href =
+      'index.html';
+
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+// GOOGLE LOGIN
+document
+.getElementById('googleLoginBtn')
+.addEventListener('click',
+
+async ()=>{
+
+  await googleLogin();
+
+});
+
+
+
+
+
+
+
+
+
+
+// CHECK SESSION
+const {
+  data:{ session }
+} = await supabase.auth.getSession();
+
+
+
+
+if(session){
+
+  const {
+    data:{ user }
+  } = await supabase.auth.getUser();
+
+
+
+
+  if(user){
+
+    const {
+      data: profile
+    } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', user.id)
+      .single();
+
+
+
+
+    if(profile){
+
+      if(profile.role === 'seller'){
+
+        window.location.href =
+          'seller-dashboard.html';
+
+      }
+      else if(profile.role === 'admin'){
+
+        window.location.href =
+          'admin-dashboard.html';
+
+      }
+      else{
+
+        window.location.href =
+          'index.html';
+
+      }
+
+    }
+
+  }
+
+}
+
+</script>
+
+
 </body>
 </html>
-

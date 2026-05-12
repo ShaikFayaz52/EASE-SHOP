@@ -1,125 +1,736 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Register — ShopEase</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Register | ShopEase</title>
+
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+
+<style>
+
+body{
+
+  margin:0;
+
+  padding:0;
+
+  background:#f4f7fb;
+
+  font-family:'Poppins',sans-serif;
+
+}
+
+
+.register-page{
+
+  max-width:1200px;
+
+  margin:auto;
+
+  padding:20px;
+
+}
+
+
+.register-container{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:40px;
+
+  align-items:center;
+
+  margin-top:40px;
+
+}
+
+
+.register-left{
+
+  padding:20px;
+
+}
+
+
+.register-left h1{
+
+  font-size:48px;
+
+  margin-bottom:20px;
+
+  color:#111827;
+
+}
+
+
+.register-left p{
+
+  color:#6b7280;
+
+  font-size:18px;
+
+  line-height:1.7;
+
+}
+
+
+.feature-list{
+
+  margin-top:30px;
+
+}
+
+
+.feature-item{
+
+  margin-bottom:15px;
+
+  color:#374151;
+
+}
+
+
+.register-card{
+
+  background:white;
+
+  padding:40px;
+
+  border-radius:24px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+.register-title{
+
+  font-size:32px;
+
+  font-weight:700;
+
+  color:#111827;
+
+  margin-bottom:10px;
+
+}
+
+
+.register-subtitle{
+
+  color:#6b7280;
+
+  margin-bottom:30px;
+
+}
+
+
+.form-group{
+
+  margin-bottom:20px;
+
+}
+
+
+.form-group label{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  font-weight:600;
+
+  color:#374151;
+
+}
+
+
+.form-group input,
+.form-group select{
+
+  width:100%;
+
+  padding:14px;
+
+  border:1px solid #d1d5db;
+
+  border-radius:14px;
+
+  font-size:15px;
+
+  outline:none;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus{
+
+  border-color:#0ea5e9;
+
+}
+
+
+.register-btn{
+
+  width:100%;
+
+  background:#10b981;
+
+  color:white;
+
+  border:none;
+
+  padding:15px;
+
+  border-radius:14px;
+
+  font-size:17px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+
+.register-btn:hover{
+
+  opacity:0.9;
+
+}
+
+
+.divider{
+
+  text-align:center;
+
+  margin:25px 0;
+
+  color:#6b7280;
+
+}
+
+
+.google-btn{ width:100%; background:white; color:#111827; border:1px solid #d1d5db; padding:14px; border-radius:14px; font-size:16px; font-weight:600; cursor:pointer; transition:0.3s; } .google-btn:hover{ background:#f3f4f6; }
+
+
+.google-btn:hover{
+
+  background:#f9fafb;
+
+}
+
+
+.login-link{
+
+  margin-top:25px;
+
+  text-align:center;
+
+  color:#6b7280;
+
+}
+
+
+.login-link a{
+
+  color:#0ea5e9;
+
+  text-decoration:none;
+
+  font-weight:600;
+
+}
+
+
+@media(max-width:900px){
+
+  .register-container{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .register-left{
+
+    text-align:center;
+
+  }
+
+
+  .register-left h1{
+
+    font-size:36px;
+
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <header class="site-header">
-    <div>
-      <h1 class="logo">ShopEase</h1>
-      <div class="muted" style="font-size:13px">Create your account</div>
+
+
+
+
+
+<div class="register-page">
+
+
+
+
+
+<header class="site-header">
+
+  <div>
+
+    <h1 class="logo">
+      ShopEase
+    </h1>
+
+    <div
+      class="muted"
+      style="font-size:13px"
+    >
+      Create Your Account
     </div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="orders.html">Orders</a>
-      <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-      <a href="login.html">Login</a>
-    </nav>
-  </header>
 
-  <main class="page">
-    <section class="hero-card" style="margin-top:8px;">
-      <div class="hero-left">
-        <span class="kicker">Join ShopEase</span>
-        <h2>Create your account</h2>
-        <p class="muted">Sign up to save addresses, track orders and get exclusive deals.</p>
-        <ul style="margin-top:14px;line-height:1.6;color:#374151">
-          <li>Secure payments</li>
-          <li>Faster checkout</li>
-          <li>Personalized recommendations</li>
-        </ul>
-      </div>
-      <div class="hero-right" style="background:linear-gradient(180deg,#fff,#f7fbff);color:#0f172a;box-shadow:none;align-items:flex-start;padding:20px;">
-        <div class="auth-form" style="max-width:360px;width:100%;">
-          <h2 style="text-align:left;margin-bottom:6px;color:#0f172a;">Create account</h2>
-          <form id="createEmailForm" onsubmit="return false;">
-            <label for="regName">Full name</label>
-            <input id="regName" type="text" placeholder="Your name" />
-            <label for="regEmail">Email</label>
-            <input id="regEmail" type="email" placeholder="you@example.com" />
-            <label for="regPassword">Password</label>
-            <input id="regPassword" type="password" placeholder="Create password" />
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button id="createEmailBtn" class="primary">Create account</button>
-            </div>
-          </form>
+  </div>
 
-          <div style="text-align:center;margin:12px 0;color:#6b7280">— or sign up with —</div>
-          <div style="display:flex;gap:10px;justify-content:center">
-            <button id="regGoogle" class="primary">Google</button>
-          </div>
 
-          <div style="margin-top:12px;border-top:1px solid #eef2f7;padding-top:12px">
-            <label for="regPhone">Mobile Number</label>
-            <input id="regPhone" type="tel" placeholder="+91 98765 43210" />
-            <div style="display:flex;gap:8px;margin-top:8px">
-              <button id="regSendOtp" class="primary">Send OTP</button>
-              <button id="regVerifyOtp" class="primary" style="display:none">Verify</button>
-            </div>
-            <input id="regOtpInput" placeholder="Enter OTP" class="otp-input" style="margin-top:10px;display:block;width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ee" />
-          </div>
 
-          <p style="text-align:center;margin-top:14px;color:#475569">Already have an account? <a href="login.html">Sign in</a></p>
-        </div>
-      </div>
-    </section>
-  </main>
+  <nav class="nav">
 
-  <footer class="site-footer">
-    <div>&copy; 2025 ShopEase. All rights reserved.</div>
-    <div style="margin-top:6px">support@fayazshopping.com</div>
-  </footer>
+    <a href="index.html">
+      Home
+    </a>
 
-  <script src="firebase-config.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="auth.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      const createBtn = document.getElementById('createEmailBtn');
-      const createForm = document.getElementById('createEmailForm');
-      createBtn.addEventListener('click', function(){
-        const email = document.getElementById('regEmail').value.trim();
-        const pass = document.getElementById('regPassword').value.trim();
-        if(!email || !pass) { alert('Enter email and password'); return; }
-        window.appAuth.createUserWithEmail(email, pass);
-      });
-      createForm.addEventListener('submit', function(e){ e.preventDefault(); createBtn.click(); });
+    <a href="products.html">
+      Products
+    </a>
 
-      document.getElementById('regGoogle').addEventListener('click', function(){ window.appAuth.signInWithGoogle(); });
+    <a href="orders.html">
+      Orders
+    </a>
 
-      const send = document.getElementById('regSendOtp');
-      const verify = document.getElementById('regVerifyOtp');
-      send.addEventListener('click', function(e){
-        e.preventDefault();
-        const phone = document.getElementById('regPhone').value.trim();
-        if(!phone){ alert('Enter phone'); return; }
-        if(window.FIREBASE_CONFIG && window.firebase && firebase.auth){
-          window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('regSendOtp', { size: 'invisible' });
-          firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier)
-            .then(confirmationResult => { window.confirmationResult = confirmationResult; alert('OTP sent'); verify.style.display='inline-block'; })
-            .catch(err => alert('Failed to send OTP: '+err.message));
-          return;
-        }
-        window.appAuth.sendPhoneOtpDev(phone).then(()=>{ verify.style.display='inline-block'; });
-      });
-      verify.addEventListener('click', function(e){
-        e.preventDefault();
-        const phone = document.getElementById('regPhone').value.trim();
-        const code = document.getElementById('regOtpInput').value.trim();
-        if(window.FIREBASE_CONFIG && window.firebase && window.confirmationResult){
-          window.confirmationResult.confirm(code).then(result=>{ window.location.href='profile.html'; }).catch(err=>alert('Invalid code'));
-          return;
-        }
-        const ok = window.appAuth.verifyOtpDev(phone, code);
-        if(!ok) alert('Invalid OTP');
-      });
-    });
-  </script>
+    <a href="cart.html">
+      Cart
+    </a>
+
+    <a href="login.html">
+      Login
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+
+
+
+
+
+<div class="register-container">
+
+
+
+
+<div class="register-left">
+
+  <h1>
+
+    Join ShopEase
+
+  </h1>
+
+
+
+
+  <p>
+
+    Create your customer or seller account
+    and start shopping or selling online.
+
+  </p>
+
+
+
+
+
+  <div class="feature-list">
+
+    <div class="feature-item">
+      ✓ Fast Checkout
+    </div>
+
+    <div class="feature-item">
+      ✓ Secure Payments
+    </div>
+
+    <div class="feature-item">
+      ✓ Seller Dashboard
+    </div>
+
+    <div class="feature-item">
+      ✓ Order Tracking
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="register-card">
+
+  <div class="register-title">
+
+    Create Account
+
+  </div>
+
+
+
+  <div class="register-subtitle">
+
+    Register as customer or seller
+
+  </div>
+
+
+
+
+
+
+  <form id="registerForm">
+
+
+
+
+
+    <div class="form-group">
+
+      <label>
+        Full Name
+      </label>
+
+      <input
+        type="text"
+        id="name"
+        placeholder="Enter your name"
+        required
+      >
+
+    </div>
+
+
+
+
+
+
+    <div class="form-group">
+
+      <label>
+        Email Address
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        placeholder="Enter your email"
+        required
+      >
+
+    </div>
+
+
+
+
+
+
+    <div class="form-group">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        placeholder="Create password"
+        required
+      >
+
+    </div>
+
+
+
+
+
+
+    <div class="form-group">
+
+      <label>
+        Register As
+      </label>
+
+      <select id="role">
+
+        <option value="customer">
+          Customer
+        </option>
+
+        <option value="seller">
+          Seller
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+
+
+
+    <button
+      type="submit"
+      class="register-btn"
+    >
+
+      Create Account
+
+    </button>
+
+  </form>
+
+
+
+
+
+
+
+  <div class="divider">
+
+    OR
+
+  </div>
+
+
+
+
+
+
+
+  <button
+    class="google-btn"
+    id="googleRegisterBtn"
+  >
+
+    Continue with Google
+
+  </button>
+
+
+
+
+
+
+
+  <div class="login-link">
+
+    Already have an account?
+
+    <a href="login.html">
+
+      Login
+
+    </a>
+
+  </div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<footer class="site-footer">
+
+  <div>
+    &copy; 2025 ShopEase.
+    All rights reserved.
+  </div>
+
+</footer>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script type="module">
+
+import {
+  registerUser,
+  googleLogin
+} from './auth.js';
+
+
+
+
+// REGISTER
+document
+.getElementById('registerForm')
+.addEventListener('submit',
+
+async (e)=>{
+
+  e.preventDefault();
+
+
+
+
+  const name =
+    document.getElementById(
+      'name'
+    ).value;
+
+
+
+
+  const email =
+    document.getElementById(
+      'email'
+    ).value;
+
+
+
+
+  const password =
+    document.getElementById(
+      'password'
+    ).value;
+
+
+
+
+  const role =
+    document.getElementById(
+      'role'
+    ).value;
+
+
+
+
+
+  const user =
+    await registerUser(
+
+      name,
+      email,
+      password,
+      role
+
+    );
+
+
+
+
+
+  if(user){
+
+    alert(
+      'Account created successfully'
+    );
+
+
+
+
+    // REDIRECT
+    if(role === 'seller'){
+
+      window.location.href =
+        'seller-dashboard.html';
+
+    }
+    else{
+
+      window.location.href =
+        'index.html';
+
+    }
+
+  }
+
+});
+
+
+
+
+
+
+
+
+
+
+// GOOGLE REGISTER
+document
+.getElementById('googleRegisterBtn')
+.addEventListener('click',
+
+async ()=>{
+
+  await googleLogin();
+
+});
+
+</script>
+
+
 </body>
 </html>

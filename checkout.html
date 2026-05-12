@@ -1,156 +1,673 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Checkout</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root{--accent:#ff6b6b;--bg:#f6f8fb;--card:#ffffff;--muted:#6b7280}
-        *{box-sizing:border-box;font-family:'Poppins',sans-serif}
-        body{margin:0;background:linear-gradient(180deg,#eef2ff 0%, #f6fbff 100%);color:#111}
-        .wrap{max-width:760px;margin:40px auto;padding:24px}
-        .card{background:var(--card);border-radius:12px;padding:22px;box-shadow:0 8px 30px rgba(16,24,40,0.08)}
-        header{display:flex;align-items:center;gap:16px;margin-bottom:16px}
-        header h1{margin:0;font-size:20px;letter-spacing:0.4px}
-        .badge{background:linear-gradient(90deg,var(--accent),#ffa07a);color:#fff;padding:6px 10px;border-radius:8px;font-weight:600;font-size:13px}
-        form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-        .full{grid-column:1/-1}
-        label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
-        input[type=text],input[type=tel],input[type=number]{width:100%;padding:10px 12px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px}
-        .radios{display:flex;flex-direction:column;gap:6px}
-        .captcha-row{display:flex;align-items:center;gap:12px}
-        #captchaBox{padding:10px 14px;border-radius:8px;background:#f3f6ff;border:1px dashed #cbd5e1;font-weight:700;letter-spacing:4px}
-        button, input[type=submit]{cursor:pointer;border:0;padding:10px 14px;border-radius:8px;background:var(--accent);color:#fff;font-weight:600}
-        #refreshCaptcha{background:#fff;color:var(--accent);border:1px solid #ffdede;padding:8px 10px}
-        #captchaError{color:#d0342c;font-size:13px;display:none}
-        .actions{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:12px}
-        .note{font-size:13px;color:var(--muted)}
-        @media (max-width:640px){form{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start} .actions{justify-content:stretch}}
-    </style>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Checkout | ShopEase</title>
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+
+<style>
+
+body{
+
+  margin:0;
+
+  padding:0;
+
+  font-family:'Poppins',sans-serif;
+
+  background:#f4f7fb;
+
+}
+
+
+.checkout-page{
+
+  max-width:900px;
+
+  margin:40px auto;
+
+  padding:20px;
+
+}
+
+
+.checkout-card{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:30px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+.checkout-title{
+
+  font-size:32px;
+
+  font-weight:700;
+
+  margin-bottom:10px;
+
+  color:#111827;
+
+}
+
+
+.checkout-subtitle{
+
+  color:#6b7280;
+
+  margin-bottom:30px;
+
+}
+
+
+.form-group{
+
+  margin-bottom:20px;
+
+}
+
+
+.form-group label{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  font-weight:600;
+
+  color:#374151;
+
+}
+
+
+.form-group input,
+
+.form-group textarea,
+
+.form-group select{
+
+  width:100%;
+
+  padding:14px;
+
+  border:1px solid #d1d5db;
+
+  border-radius:12px;
+
+  font-size:15px;
+
+  outline:none;
+
+}
+
+
+.form-group textarea{
+
+  resize:none;
+
+  height:100px;
+
+}
+
+
+.order-summary{
+
+  background:#f9fafb;
+
+  padding:20px;
+
+  border-radius:14px;
+
+  margin-top:25px;
+
+}
+
+
+.summary-item{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-bottom:12px;
+
+}
+
+
+.total-row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-top:20px;
+
+  font-size:22px;
+
+  font-weight:700;
+
+}
+
+
+.place-order-btn{
+
+  width:100%;
+
+  margin-top:30px;
+
+  background:#10b981;
+
+  color:white;
+
+  border:none;
+
+  padding:16px;
+
+  border-radius:14px;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+
+.place-order-btn:hover{
+
+  opacity:0.9;
+
+}
+
+
+.empty-cart{
+
+  text-align:center;
+
+  padding:60px;
+
+}
+
+
+.empty-cart a{
+
+  text-decoration:none;
+
+  background:#0ea5e9;
+
+  color:white;
+
+  padding:12px 20px;
+
+  border-radius:10px;
+
+  display:inline-block;
+
+  margin-top:20px;
+
+}
+
+
+@media(max-width:768px){
+
+  .checkout-card{
+
+    padding:20px;
+
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
-    <div class="wrap">
-        <header class="site-header" style="margin-bottom:14px">
-            <div>
-                <h1 class="logo">ShopEase</h1>
-                <div class="muted" style="font-size:13px">Secure checkout</div>
-            </div>
-            <nav class="nav">
-                <a href="index.html">Home</a>
-                <a href="products.html">Products</a>
-                <a href="orders.html">Orders</a>
-                <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-                <a href="login.html">Login</a>
-            </nav>
-        </header>
-        <div class="card">
-            <header>
-                <div>
-                    <h1>Place Your Order</h1>
-                    <div class="note">Fast & secure checkout</div>
-                </div>
-                <div style="margin-left:auto"><span class="badge">Billing Details</span></div>
-            </header>
 
-            <form id="checkoutForm" action="success.html" method="get" novalidate>
-                <div class="full">
-                    <label>Mobile Number</label>
-                    <input required type="tel" name="mobile" placeholder="e.g. +1 555 123 4567">
-                </div>
 
-                <div class="full">
-                    <label>Delivery Address</label>
-                    <input required type="text" name="address" placeholder="Street, City, State, ZIP">
-                </div>
 
-                <div>
-                    <label>Payment Method</label>
-                    <div class="radios">
-                        <label><input type="radio" name="payment" value="cod" required> Cash on Delivery</label>
-                        <label><input type="radio" name="payment" value="upi"> UPI</label>
-                        <label><input type="radio" name="payment" value="card"> Debit / Credit Card</label>
-                    </div>
-                </div>
+<header class="site-header">
 
-                <div>
-                    <label>Order Summary</label>
-                    <div style="background:#fff8f6;border:1px solid #ffe7e0;padding:10px;border-radius:8px;font-size:14px">Items: 3 &nbsp; • &nbsp; Total: ₹1,299</div>
-                </div>
+  <div>
 
-                <div class="full">
-                    <label>Enter the captcha</label>
-                    <div class="captcha-row">
-                        <div id="captchaBox">------</div>
-                        <button type="button" id="refreshCaptcha">Refresh</button>
-                        <input type="text" id="captchaInput" name="captcha" placeholder="Type captcha here" required style="flex:1;padding:10px;border:1px solid #e6e9ef;border-radius:8px">
-                    </div>
-                    <div id="captchaError">Captcha does not match.</div>
-                </div>
+    <h1 class="logo">
+      ShopEase
+    </h1>
 
-                <div class="full actions">
-                    <div class="note">By placing the order you agree to our terms.</div>
-                    <input type="submit" value="Place Order">
-                </div>
-            </form>
-        </div>
+    <div
+      class="muted"
+      style="font-size:13px"
+    >
+      Secure Checkout
     </div>
 
-    <script src="main.js"></script>
-    <script>
-    // Simple client-side captcha
-    function generateCaptcha() {
-        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        let code = '';
-        for (let i = 0; i < 6; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
-        return code;
-    }
+  </div>
 
-    document.addEventListener('DOMContentLoaded', function(){
-        const captchaBox = document.getElementById('captchaBox');
-        const refreshBtn = document.getElementById('refreshCaptcha');
-        const captchaInput = document.getElementById('captchaInput');
-        const captchaError = document.getElementById('captchaError');
-        const form = document.getElementById('checkoutForm');
 
-        let current = generateCaptcha();
-        captchaBox.textContent = current;
+  <nav class="nav">
 
-        refreshBtn.addEventListener('click', function(){
-            current = generateCaptcha();
-            captchaBox.textContent = current;
-            captchaError.style.display = 'none';
-            captchaInput.value = '';
-        });
+    <a href="index.html">
+      Home
+    </a>
 
-        form.addEventListener('submit', function(e){
-            e.preventDefault();
-            if (captchaInput.value.trim().toUpperCase() !== current) {
-                captchaError.style.display = 'block';
-                // regenerate captcha on failure
-                current = generateCaptcha();
-                captchaBox.textContent = current;
-                captchaInput.value = '';
-                return;
-            }
+    <a href="products.html">
+      Products
+    </a>
 
-            // Build order from cart and save to localStorage
-            const cart = (typeof getCart === 'function') ? getCart() : JSON.parse(localStorage.getItem('cart')||'[]');
-            if(!cart || cart.length === 0){
-                alert('Your cart is empty. Add items before placing an order.');
-                return;
-            }
-            const total = cart.reduce((s,i)=>s + (i.price * i.qty), 0);
-            const orders = JSON.parse(localStorage.getItem('orders')||'[]');
-            const order = { id: Math.floor(Math.random()*900000)+100000, date: Date.now(), items: cart, total };
-            orders.push(order);
-            localStorage.setItem('orders', JSON.stringify(orders));
+    <a href="orders.html">
+      Orders
+    </a>
 
-            // clear cart and go to success page
-            if(typeof clearCart === 'function') clearCart(); else localStorage.removeItem('cart');
-            window.location.href = 'success.html';
-        });
-    });
-    </script>
+    <a href="cart.html">
+      Cart
+      (
+      <span id="cart-count">
+        0
+      </span>
+      )
+    </a>
+
+    <a href="profile.html">
+      Profile
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+
+
+<div class="checkout-page">
+
+  <div
+    class="checkout-card"
+    id="checkoutContainer"
+  >
+
+  </div>
+
+</div>
+
+
+
+
+
+<script type="module">
+
+import { supabase }
+from './supabase.js';
+
+
+
+
+// GET CART
+function getCart(){
+
+  return JSON.parse(
+    localStorage.getItem('cart') || '[]'
+  );
+
+}
+
+
+
+// UPDATE CART COUNT
+function updateCartCount(){
+
+  const cart = getCart();
+
+  const totalQty =
+    cart.reduce((s,i)=>s+i.qty,0);
+
+  document.getElementById('cart-count')
+  .innerText = totalQty;
+
+}
+
+
+updateCartCount();
+
+
+
+
+// RENDER CHECKOUT
+async function renderCheckout(){
+
+  const cart = getCart();
+
+  const container =
+    document.getElementById(
+      'checkoutContainer'
+    );
+
+
+
+  // EMPTY CART
+  if(cart.length === 0){
+
+    container.innerHTML = `
+
+      <div class="empty-cart">
+
+        <h2>
+          Your cart is empty
+        </h2>
+
+        <p>
+          Add products before checkout
+        </p>
+
+        <a href="products.html">
+          Shop Products
+        </a>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+
+
+  // TOTAL
+  const total =
+    cart.reduce((s,i)=>{
+
+      return s + (i.price * i.qty);
+
+    },0);
+
+
+
+
+  // SHOW FORM
+  container.innerHTML = `
+
+    <div class="checkout-title">
+      Checkout
+    </div>
+
+    <div class="checkout-subtitle">
+      Complete your order details
+    </div>
+
+
+
+    <form id="checkoutForm">
+
+      <div class="form-group">
+
+        <label>
+          Full Name
+        </label>
+
+        <input
+          type="text"
+          id="name"
+          required
+        >
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Phone Number
+        </label>
+
+        <input
+          type="text"
+          id="phone"
+          required
+        >
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Delivery Address
+        </label>
+
+        <textarea
+          id="address"
+          required
+        ></textarea>
+
+      </div>
+
+
+
+      <div class="form-group">
+
+        <label>
+          Payment Method
+        </label>
+
+        <select id="payment">
+
+          <option value="COD">
+            Cash On Delivery
+          </option>
+
+          <option value="UPI">
+            UPI
+          </option>
+
+          <option value="CARD">
+            Debit / Credit Card
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+
+      <div class="order-summary">
+
+        <h3>
+          Order Summary
+        </h3>
+
+
+        ${cart.map(item => `
+
+          <div class="summary-item">
+
+            <span>
+              ${item.title}
+              ×
+              ${item.qty}
+            </span>
+
+            <span>
+              ₹${item.price * item.qty}
+            </span>
+
+          </div>
+
+        `).join('')}
+
+
+
+
+        <div class="total-row">
+
+          <span>
+            Total
+          </span>
+
+          <span>
+            ₹${total}
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+
+      <button
+        type="submit"
+        class="place-order-btn"
+      >
+        Place Order
+      </button>
+
+    </form>
+
+  `;
+
+
+
+
+
+  // SUBMIT ORDER
+  document
+  .getElementById('checkoutForm')
+  .addEventListener('submit',
+
+    async (e)=>{
+
+      e.preventDefault();
+
+
+
+
+      // USER
+      const {
+        data: { user }
+      } = await supabase.auth.getUser();
+
+
+
+
+      if(!user){
+
+        alert('Please login first');
+
+        window.location.href =
+          'login.html';
+
+        return;
+
+      }
+
+
+
+
+      // ORDER DATA
+      const orderData = {
+
+        user_id: user.id,
+
+        items: cart,
+
+        total: total,
+
+        customer_name:
+          document.getElementById('name').value,
+
+        phone:
+          document.getElementById('phone').value,
+
+        address:
+          document.getElementById('address').value,
+
+        payment_method:
+          document.getElementById('payment').value,
+
+        status: 'Pending'
+
+      };
+
+
+
+
+      // SAVE ORDER
+      const {
+        error
+      } = await supabase
+        .from('orders')
+        .insert([orderData]);
+
+
+
+
+      if(error){
+
+        alert(error.message);
+
+        return;
+
+      }
+
+
+
+
+      // CLEAR CART
+      localStorage.removeItem('cart');
+
+
+
+
+      // SUCCESS
+      alert('Order placed successfully');
+
+
+
+
+      window.location.href =
+        'success.html';
+
+  });
+
+}
+
+
+renderCheckout();
+
+</script>
+
+
 </body>
 </html>

@@ -1,74 +1,489 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Cart | ShopEase</title>
-        <link rel="stylesheet" href="styles.css">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Cart | ShopEase</title>
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+
+  <style>
+
+    body{
+      background:#f4f7fb;
+      font-family:Poppins,sans-serif;
+      margin:0;
+      padding:0;
+    }
+
+
+    .cart-page{
+
+      max-width:1100px;
+
+      margin:40px auto;
+
+      padding:20px;
+
+    }
+
+
+    .cart-title{
+
+      font-size:32px;
+
+      font-weight:700;
+
+      margin-bottom:25px;
+
+      color:#111827;
+
+    }
+
+
+    .cart-list{
+
+      display:flex;
+
+      flex-direction:column;
+
+      gap:20px;
+
+    }
+
+
+    .cart-item{
+
+      background:#fff;
+
+      border-radius:16px;
+
+      padding:20px;
+
+      display:flex;
+
+      gap:20px;
+
+      align-items:center;
+
+      box-shadow:0 8px 20px rgba(0,0,0,0.06);
+
+    }
+
+
+    .cart-image{
+
+      width:140px;
+
+      height:120px;
+
+      object-fit:cover;
+
+      border-radius:12px;
+
+    }
+
+
+    .cart-details{
+
+      flex:1;
+
+    }
+
+
+    .cart-details h3{
+
+      margin:0;
+
+      font-size:22px;
+
+      color:#111827;
+
+    }
+
+
+    .cart-price{
+
+      margin-top:8px;
+
+      color:#0ea5e9;
+
+      font-size:18px;
+
+      font-weight:700;
+
+    }
+
+
+    .qty-controls{
+
+      margin-top:15px;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:10px;
+
+    }
+
+
+    .qty-controls button{
+
+      width:35px;
+
+      height:35px;
+
+      border:none;
+
+      border-radius:8px;
+
+      background:#0ea5e9;
+
+      color:white;
+
+      font-size:18px;
+
+      cursor:pointer;
+
+    }
+
+
+    .qty-number{
+
+      font-size:18px;
+
+      font-weight:600;
+
+    }
+
+
+    .remove-btn{
+
+      background:#ef4444;
+
+      color:white;
+
+      border:none;
+
+      padding:10px 16px;
+
+      border-radius:10px;
+
+      cursor:pointer;
+
+      font-weight:600;
+
+    }
+
+
+    .cart-summary{
+
+      margin-top:30px;
+
+      background:#fff;
+
+      padding:25px;
+
+      border-radius:16px;
+
+      box-shadow:0 8px 20px rgba(0,0,0,0.06);
+
+    }
+
+
+    .total-row{
+
+      display:flex;
+
+      justify-content:space-between;
+
+      align-items:center;
+
+      font-size:24px;
+
+      font-weight:700;
+
+      margin-bottom:20px;
+
+    }
+
+
+    .cart-buttons{
+
+      display:flex;
+
+      gap:15px;
+
+      justify-content:flex-end;
+
+    }
+
+
+    .clear-btn{
+
+      background:#6b7280;
+
+      color:white;
+
+      border:none;
+
+      padding:12px 20px;
+
+      border-radius:10px;
+
+      cursor:pointer;
+
+      font-weight:600;
+
+    }
+
+
+    .checkout-btn{
+
+      background:#10b981;
+
+      color:white;
+
+      border:none;
+
+      padding:12px 20px;
+
+      border-radius:10px;
+
+      cursor:pointer;
+
+      font-weight:600;
+
+      text-decoration:none;
+
+    }
+
+
+    .empty-cart{
+
+      background:#fff;
+
+      padding:60px;
+
+      border-radius:16px;
+
+      text-align:center;
+
+      box-shadow:0 8px 20px rgba(0,0,0,0.06);
+
+    }
+
+
+    @media(max-width:768px){
+
+      .cart-item{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+      }
+
+
+      .cart-image{
+
+        width:100%;
+
+        height:220px;
+
+      }
+
+
+      .cart-buttons{
+
+        flex-direction:column;
+
+      }
+
+    }
+
+  </style>
+
 </head>
+
 <body>
-    <header class="site-header">
-        <div>
-            <h1 class="logo">ShopEase</h1>
-            <div class="muted" style="font-size:13px">Fast — Friendly — Reliable</div>
-        </div>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
-            <a href="orders.html">Orders</a>
-            <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-            <a href="login.html">Login</a>
-        </nav>
-    </header>
 
-    <main class="page">
-        <h2>Your Cart</h2>
 
-        <div class="cart-list" id="cart-items">
-            <!-- items injected by main.js -->
-        </div>
 
-        <div class="cart-summary">Total: <span id="cart-total">₹0</span></div>
-        <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end">
-            <button onclick="clearCart()">Clear Cart</button>
-            <a id="checkout-link" href="checkout.html" onclick="proceedToCheckout" style="background-color:#84b9f1; color:rgb(23, 21, 21); border:none; padding:8px 16px; border-radius:4px; text-decoration:none; display:inline-block;">Proceed to Checkout</a>
-        </div>
-    </main>
+<header class="site-header">
 
-    <footer class="site-footer">
-        <div>&copy; 2025 ShopEase. All rights reserved.</div>
-        <div style="margin-top:6px">support@fayazshopping.com</div>
-    </footer>
+  <div>
 
-    <script src="main.js"></script>
-    <script>
-        function proceedToCheckout(e){
-            var countEl = document.getElementById('cart-count');
-            var count = countEl ? parseInt(countEl.textContent) || 0 : 0;
-            if(count === 0){
-                e.preventDefault();
-                alert('Your cart is empty. Add items before checkout.');
-                return false;
-            }
-            return true;
-        }
+    <h1 class="logo">
+      ShopEase
+    </h1>
 
-        document.addEventListener('DOMContentLoaded', function(){
-            var link = document.getElementById('checkout-link');
-            var countEl = document.getElementById('cart-count');
-            var count = countEl ? parseInt(countEl.textContent) || 0 : 0;
-            if(link){
-                if(count === 0){
-                    link.style.backgroundColor = '#6c757d';
-                    link.style.pointerEvents = 'none';
-                    link.style.cursor = 'not-allowed';
-                    link.title = 'Cart is empty';
-                } else {
-                    link.style.pointerEvents = '';
-                }
-            }
-        });
-    </script>
+    <div
+      class="muted"
+      style="font-size:13px"
+    >
+      Fast — Friendly — Reliable
+    </div>
+
+  </div>
+
+
+  <nav class="nav">
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="products.html">
+      Products
+    </a>
+
+    <a href="orders.html">
+      Orders
+    </a>
+
+    <a href="cart.html">
+      Cart
+      (
+      <span id="cart-count">
+        0
+      </span>
+      )
+    </a>
+
+    <a href="profile.html">
+      Profile
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+
+
+<div class="cart-page">
+
+  <div class="cart-title">
+    Your Shopping Cart
+  </div>
+
+
+
+  <div
+    class="cart-list"
+    id="cart-items"
+  >
+
+  </div>
+
+
+
+
+  <div class="cart-summary">
+
+    <div class="total-row">
+
+      <span>
+        Total
+      </span>
+
+      <span id="cart-total">
+        ₹0
+      </span>
+
+    </div>
+
+
+
+    <div class="cart-buttons">
+
+      <button
+        class="clear-btn"
+        onclick="clearCart()"
+      >
+        Clear Cart
+      </button>
+
+
+
+      <a
+        href="checkout.html"
+        class="checkout-btn"
+        onclick="return proceedToCheckout()"
+      >
+        Proceed to Checkout
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+<footer class="site-footer">
+
+  <div>
+    &copy; 2025 ShopEase.
+    All rights reserved.
+  </div>
+
+  <div style="margin-top:6px">
+    support@shopease.com
+  </div>
+
+</footer>
+
+
+
+
+
+<script src="main.js"></script>
+
+
+
+<script>
+
+function proceedToCheckout(){
+
+  const cart =
+    JSON.parse(
+      localStorage.getItem('cart') || '[]'
+    );
+
+
+  if(cart.length === 0){
+
+    alert('Your cart is empty');
+
+    return false;
+
+  }
+
+
+  return true;
+
+}
+
+</script>
+
+
 </body>
 </html>
-            

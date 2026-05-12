@@ -1,80 +1,709 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Profile — ShopEase</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .profile-card{max-width:640px;margin:18px auto;padding:18px;background:#fff;border-radius:10px;box-shadow:0 8px 26px rgba(15,23,42,0.06)}
-    .field{margin-bottom:10px}
-    label{display:block;margin-bottom:6px;font-weight:600}
-  </style>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Profile | ShopEase</title>
+
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+
+<style>
+
+body{
+
+  margin:0;
+
+  padding:0;
+
+  background:#f4f7fb;
+
+  font-family:'Poppins',sans-serif;
+
+}
+
+
+.profile-page{
+
+  max-width:900px;
+
+  margin:40px auto;
+
+  padding:20px;
+
+}
+
+
+.profile-card{
+
+  background:white;
+
+  border-radius:24px;
+
+  padding:40px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+.profile-header{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+
+  margin-bottom:30px;
+
+}
+
+
+.profile-avatar{
+
+  width:90px;
+
+  height:90px;
+
+  border-radius:50%;
+
+  background:#0ea5e9;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  color:white;
+
+  font-size:36px;
+
+  font-weight:700;
+
+}
+
+
+.profile-info h2{
+
+  margin:0;
+
+  color:#111827;
+
+}
+
+
+.profile-info p{
+
+  margin-top:8px;
+
+  color:#6b7280;
+
+}
+
+
+.form-group{
+
+  margin-bottom:22px;
+
+}
+
+
+.form-group label{
+
+  display:block;
+
+  margin-bottom:8px;
+
+  font-weight:600;
+
+  color:#374151;
+
+}
+
+
+.form-group input,
+
+.form-group textarea{
+
+  width:100%;
+
+  padding:14px;
+
+  border:1px solid #d1d5db;
+
+  border-radius:14px;
+
+  font-size:15px;
+
+  outline:none;
+
+}
+
+
+.form-group textarea{
+
+  resize:none;
+
+  height:100px;
+
+}
+
+
+.form-group input:focus,
+
+.form-group textarea:focus{
+
+  border-color:#0ea5e9;
+
+}
+
+
+.button-group{
+
+  display:flex;
+
+  gap:15px;
+
+  margin-top:30px;
+
+  flex-wrap:wrap;
+
+}
+
+
+.save-btn{
+
+  background:#10b981;
+
+  color:white;
+
+  border:none;
+
+  padding:14px 22px;
+
+  border-radius:14px;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+
+.logout-btn{
+
+  background:#ef4444;
+
+  color:white;
+
+  border:none;
+
+  padding:14px 22px;
+
+  border-radius:14px;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+}
+
+
+.save-btn:hover,
+.logout-btn:hover{
+
+  opacity:0.9;
+
+}
+
+
+.loading{
+
+  text-align:center;
+
+  padding:60px;
+
+}
+
+
+@media(max-width:768px){
+
+  .profile-card{
+
+    padding:25px;
+
+  }
+
+
+  .profile-header{
+
+    flex-direction:column;
+
+    text-align:center;
+
+  }
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <header class="site-header">
-    <div>
-      <h1 class="logo">ShopEase</h1>
-      <div class="muted" style="font-size:13px">Your profile</div>
+
+
+
+
+
+<div class="profile-page">
+
+
+
+
+<header class="site-header">
+
+  <div>
+
+    <h1 class="logo">
+      ShopEase
+    </h1>
+
+    <div
+      class="muted"
+      style="font-size:13px"
+    >
+      User Profile
     </div>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-      <a href="orders.html">Orders</a>
-      <a href="cart.html">Cart</a>
-      <a href="login.html">Account</a>
-    </nav>
-  </header>
 
-  <main class="page">
-    <div class="profile-card">
-      <h2 id="greeting">Hello</h2>
-      <div id="signedOutNotice" class="muted">You are not signed in. <a href="login.html">Sign in</a></div>
+  </div>
 
-      <div id="profileForm" style="display:none">
-        <div class="field"><label>Name</label><input id="name" type="text" /></div>
-        <div class="field"><label>Email</label><input id="email" type="email" /></div>
-        <div class="field"><label>Phone</label><input id="phone" type="tel" /></div>
-        <div class="field"><label>Address</label><input id="address" type="text" /></div>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
-          <button id="saveProfile" class="primary">Save</button>
-          <button id="signOut" class="text-button">Sign out</button>
-        </div>
-      </div>
-    </div>
-  </main>
 
-  <footer class="site-footer">&copy; 2025 ShopEase</footer>
 
-  <script src="auth.js"></script>
-  <script>
-    function getStoredUser(){ try{ return JSON.parse(localStorage.getItem('appUser')||'null'); }catch(e){ return null; } }
-    function getProfileKey(uid){ return 'profile_'+uid; }
+  <nav class="nav">
 
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const user = getStoredUser();
-      const greeting = document.getElementById('greeting');
-      const notice = document.getElementById('signedOutNotice');
-      const form = document.getElementById('profileForm');
-      if(!user){ notice.style.display='block'; form.style.display='none'; greeting.textContent='Hello'; return; }
-      notice.style.display='none'; form.style.display='block'; greeting.textContent = 'Hello, ' + (user.displayName || user.phoneNumber || user.email || 'Customer');
+    <a href="index.html">
+      Home
+    </a>
 
-      // load profile from localStorage
-      const key = getProfileKey(user.uid);
-      const profile = JSON.parse(localStorage.getItem(key) || '{}');
-      document.getElementById('name').value = profile.name || user.displayName || '';
-      document.getElementById('email').value = profile.email || user.email || '';
-      document.getElementById('phone').value = profile.phone || user.phoneNumber || '';
-      document.getElementById('address').value = profile.address || '';
+    <a href="products.html">
+      Products
+    </a>
 
-      document.getElementById('saveProfile').addEventListener('click', ()=>{
-        const data = { name: document.getElementById('name').value.trim(), email: document.getElementById('email').value.trim(), phone: document.getElementById('phone').value.trim(), address: document.getElementById('address').value.trim() };
-        localStorage.setItem(key, JSON.stringify(data));
-        alert('Profile saved locally.');
-      });
+    <a href="orders.html">
+      Orders
+    </a>
 
-      document.getElementById('signOut').addEventListener('click', ()=>{ window.appAuth.signOut(); window.location.href='index.html'; });
-    });
-  </script>
+    <a href="cart.html">
+      Cart
+    </a>
+
+    <a href="profile.html">
+      Profile
+    </a>
+
+  </nav>
+
+</header>
+
+
+
+
+
+
+
+<div class="profile-card">
+
+
+
+
+<div class="profile-header">
+
+  <div
+    class="profile-avatar"
+    id="avatarLetter"
+  >
+    U
+  </div>
+
+
+
+  <div class="profile-info">
+
+    <h2 id="profileName">
+      Loading...
+    </h2>
+
+    <p id="profileEmail">
+      loading@email.com
+    </p>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+<form id="profileForm">
+
+
+
+  <div class="form-group">
+
+    <label>
+      Full Name
+    </label>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="Enter your full name"
+    >
+
+  </div>
+
+
+
+
+
+  <div class="form-group">
+
+    <label>
+      Email Address
+    </label>
+
+    <input
+      type="email"
+      id="email"
+      placeholder="Enter your email"
+    >
+
+  </div>
+
+
+
+
+
+  <div class="form-group">
+
+    <label>
+      Phone Number
+    </label>
+
+    <input
+      type="text"
+      id="phone"
+      placeholder="Enter your phone number"
+    >
+
+  </div>
+
+
+
+
+
+  <div class="form-group">
+
+    <label>
+      Address
+    </label>
+
+    <textarea
+      id="address"
+      placeholder="Enter your address"
+    ></textarea>
+
+  </div>
+
+
+
+
+
+  <div class="button-group">
+
+    <button
+      type="submit"
+      class="save-btn"
+    >
+
+      Save Profile
+
+    </button>
+
+
+
+
+
+    <button
+      type="button"
+      class="logout-btn"
+      id="logoutBtn"
+    >
+
+      Logout
+
+    </button>
+
+  </div>
+
+</form>
+
+</div>
+
+
+
+
+
+
+<footer class="site-footer">
+
+  <div>
+    &copy; 2025 ShopEase.
+    All rights reserved.
+  </div>
+
+</footer>
+
+</div>
+
+
+
+
+
+
+
+<script type="module">
+
+import { supabase }
+from './supabase.js';
+
+
+
+
+// GET CURRENT USER
+const {
+  data: { user }
+} = await supabase.auth.getUser();
+
+
+
+
+// CHECK LOGIN
+if(!user){
+
+  window.location.href =
+    'login.html';
+
+}
+
+
+
+
+// SET USER INFO
+document.getElementById(
+  'profileEmail'
+).innerText = user.email;
+
+
+
+
+
+// LOAD PROFILE
+async function loadProfile(){
+
+  const {
+    data,
+    error
+  } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
+
+
+
+
+  if(data){
+
+    document.getElementById('name')
+    .value = data.name || '';
+
+
+
+    document.getElementById('email')
+    .value = data.email || '';
+
+
+
+    document.getElementById('phone')
+    .value = data.phone || '';
+
+
+
+    document.getElementById('address')
+    .value = data.address || '';
+
+
+
+
+    document.getElementById(
+      'profileName'
+    ).innerText =
+
+      data.name || 'User';
+
+
+
+
+    // AVATAR LETTER
+    if(data.name){
+
+      document.getElementById(
+        'avatarLetter'
+      ).innerText =
+
+        data.name
+        .charAt(0)
+        .toUpperCase();
+
+    }
+
+  }
+
+}
+
+
+loadProfile();
+
+
+
+
+
+
+
+// SAVE PROFILE
+document
+.getElementById('profileForm')
+.addEventListener('submit',
+
+async (e)=>{
+
+  e.preventDefault();
+
+
+
+
+  const profileData = {
+
+    id:user.id,
+
+    name:
+      document.getElementById(
+        'name'
+      ).value,
+
+    email:
+      document.getElementById(
+        'email'
+      ).value,
+
+    phone:
+      document.getElementById(
+        'phone'
+      ).value,
+
+    address:
+      document.getElementById(
+        'address'
+      ).value
+
+  };
+
+
+
+
+  const {
+    error
+  } = await supabase
+    .from('profiles')
+    .upsert(profileData);
+
+
+
+
+  if(error){
+
+    alert(error.message);
+
+    return;
+
+  }
+
+
+
+
+  alert(
+    'Profile updated successfully'
+  );
+
+
+
+
+  loadProfile();
+
+});
+
+
+
+
+
+
+
+
+// LOGOUT
+document
+.getElementById('logoutBtn')
+.addEventListener('click',
+
+async ()=>{
+
+  await supabase.auth.signOut();
+
+  window.location.href =
+    'login.html';
+
+});
+
+</script>
+
+
 </body>
 </html>

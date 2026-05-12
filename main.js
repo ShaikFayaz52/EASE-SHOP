@@ -1,177 +1,555 @@
-// Simple cart implementation using localStorage
-function getCart()
-{
-  try{ return JSON.parse(localStorage.getItem('cart')||'[]'); }catch(e){ return []; }
-}
-function saveCart(c){ localStorage.setItem('cart', JSON.stringify(c)); }
 
-function addToCart(id, title, price, img){
+// ======================================
+// SHOP EASE MAIN JS
+// ======================================
+
+
+
+// ======================================
+// GET CART
+// ======================================
+
+function getCart() {
+
+  return JSON.parse(
+    localStorage.getItem('cart') || '[]'
+  );
+
+}
+
+
+
+
+// ======================================
+// SAVE CART
+// ======================================
+
+function saveCart(cart) {
+
+  localStorage.setItem(
+    'cart',
+    JSON.stringify(cart)
+  );
+
+}
+
+
+
+
+// ======================================
+// UPDATE CART COUNT
+// ======================================
+
+function updateCartCount() {
+
   const cart = getCart();
-  const existing = cart.find(i=>i.id===id);
-  if(existing){ existing.qty += 1; }
-  else{ cart.push({ id, title, price: Number(price), img, qty: 1 }); }
+
+  const totalQty = cart.reduce(
+    (sum, item) => sum + item.qty,
+    0
+  );
+
+  const countElement =
+    document.getElementById('cart-count');
+
+  if (countElement) {
+
+    countElement.innerText = totalQty;
+
+  }
+
+}
+
+
+
+
+// ======================================
+// ADD TO CART
+// ======================================
+
+function addToCart(
+  id,
+  title,
+  price,
+  image
+) {
+
+  const cart = getCart();
+
+  const existingItem = cart.find(
+    item => item.id == id
+  );
+
+
+  if (existingItem) {
+
+    existingItem.qty += 1;
+
+  } else {
+
+    cart.push({
+
+      id: id,
+
+      title: title,
+
+      price: Number(price),
+
+      image: image,
+
+      qty: 1
+
+    });
+
+  }
+
+
   saveCart(cart);
-  if(window.showToast) showToast('Added to cart'); else alert('Added to cart');
-  renderCartPreview();
+
+  updateCartCount();
+
+  renderCart();
+
+  alert('Product added to cart');
+
 }
 
-function removeFromCart(id){
-  let cart = getCart(); cart = cart.filter(i=>i.id!==id); saveCart(cart); renderCart(); renderCartPreview();
+
+
+
+// ======================================
+// REMOVE FROM CART
+// ======================================
+
+function removeFromCart(id) {
+
+  let cart = getCart();
+
+  cart = cart.filter(
+    item => item.id != id
+  );
+
+  saveCart(cart);
+
+  updateCartCount();
+
+  renderCart();
+
 }
 
-function clearCart(){ localStorage.removeItem('cart'); renderCart(); renderCartPreview(); }
 
-function renderCart(){
-  const el = document.getElementById('cart-items');
-  if(!el) return;
+
+
+// ======================================
+// UPDATE QUANTITY
+// ======================================
+
+function updateQuantity(
+  id,
+  change
+) {
+
   const cart = getCart();
-  el.innerHTML = '';
-  if(cart.length===0){
-    el.innerHTML = '<p>Your cart is empty.</p>';
-    document.getElementById('cart-total').textContent='₹0';
-    renderCartPreview();
-    updateCheckoutState();
+
+  const item = cart.find(
+    i => i.id == id
+  );
+
+
+  if (!item) return;
+
+
+  item.qty += change;
+
+
+  // REMOVE ITEM IF QTY <= 0
+  if (item.qty <= 0) {
+
+    removeFromCart(id);
+
     return;
+
   }
-  cart.forEach(item=>{
-    const div = document.createElement('div'); div.className='cart-item';
-    div.innerHTML = `
-      <img src="${item.img}" alt="${item.title}">
-      <div style="flex:1">
-        <div style="font-weight:600">${item.title}</div>
-        <div style="margin-top:6px; display:flex; align-items:center; gap:8px">
-          <button aria-label="Decrease quantity" class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-          <input aria-label="Quantity for ${item.title}" class="qty-input" type="number" min="1" value="${item.qty}" onchange="setQuantity('${item.id}', this.value)" style="width:56px; text-align:center" />
-          <button aria-label="Increase quantity" class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
-          <div style="margin-left:8px">₹${(item.price*item.qty).toFixed(2)}</div>
-        </div>
+
+
+  saveCart(cart);
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+
+
+// ======================================
+// SET QUANTITY
+// ======================================
+
+function setQuantity(
+  id,
+  qty
+) {
+
+  const cart = getCart();
+
+  const item = cart.find(
+    i => i.id == id
+  );
+
+
+  if (!item) return;
+
+
+  qty = parseInt(qty);
+
+
+  if (qty <= 0) {
+
+    removeFromCart(id);
+
+    return;
+
+  }
+
+
+  item.qty = qty;
+
+  saveCart(cart);
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+
+
+// ======================================
+// CLEAR CART
+// ======================================
+
+function clearCart() {
+
+  localStorage.removeItem('cart');
+
+  updateCartCount();
+
+  renderCart();
+
+}
+
+
+
+
+// ======================================
+// CALCULATE TOTAL
+// ======================================
+
+function calculateTotal() {
+
+  const cart = getCart();
+
+  return cart.reduce(
+
+    (total, item) => {
+
+      return total + (
+        item.price * item.qty
+      );
+
+    },
+
+    0
+
+  );
+
+}
+
+
+
+
+// ======================================
+// RENDER CART
+// ======================================
+
+function renderCart() {
+
+  const cartItems =
+    document.getElementById('cart-items');
+
+  const totalElement =
+    document.getElementById('cart-total');
+
+
+  if (!cartItems) return;
+
+
+  const cart = getCart();
+
+
+  // EMPTY CART
+  if (cart.length === 0) {
+
+    cartItems.innerHTML = `
+
+      <div class="empty-cart">
+
+        <h2>
+          Your cart is empty
+        </h2>
+
       </div>
-      <div>
-        <button onclick="removeFromCart('${item.id}')">Remove</button>
-      </div>`;
-    el.appendChild(div);
+
+    `;
+
+
+    if (totalElement) {
+
+      totalElement.innerText = '₹0';
+
+    }
+
+    return;
+
+  }
+
+
+  cartItems.innerHTML = '';
+
+
+  // SHOW CART ITEMS
+  cart.forEach(item => {
+
+    cartItems.innerHTML += `
+
+      <div class="cart-item">
+
+        <img
+          src="${item.image}"
+          alt="${item.title}"
+          class="cart-image"
+        >
+
+
+        <div class="cart-details">
+
+          <h3>
+            ${item.title}
+          </h3>
+
+
+          <div class="cart-price">
+
+            ₹${item.price}
+
+          </div>
+
+
+          <div class="qty-controls">
+
+            <button
+              onclick="
+                updateQuantity(
+                  '${item.id}',
+                  -1
+                )
+              "
+            >
+              -
+            </button>
+
+
+            <input
+
+              type="number"
+
+              min="1"
+
+              value="${item.qty}"
+
+              onchange="
+                setQuantity(
+                  '${item.id}',
+                  this.value
+                )
+              "
+
+              style="
+                width:60px;
+                text-align:center;
+              "
+            >
+
+
+            <button
+              onclick="
+                updateQuantity(
+                  '${item.id}',
+                  1
+                )
+              "
+            >
+              +
+            </button>
+
+          </div>
+
+
+          <div
+            style="
+              margin-top:10px;
+              font-weight:600;
+            "
+          >
+
+            Total:
+            ₹${item.price * item.qty}
+
+          </div>
+
+        </div>
+
+
+        <button
+
+          class="remove-btn"
+
+          onclick="
+            removeFromCart(
+              '${item.id}'
+            )
+          "
+        >
+
+          Remove
+
+        </button>
+
+      </div>
+
+    `;
+
   });
-  const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
-  document.getElementById('cart-total').textContent = `₹${total.toFixed(2)}`;
-  renderCartPreview();
-  updateCheckoutState();
-}
 
-function updateQuantity(id, delta){
-  const cart = getCart();
-  const item = cart.find(i=>i.id===id);
-  if(!item) return;
-  item.qty = Math.max(0, item.qty + Number(delta));
-  if(item.qty === 0){
-    const newCart = cart.filter(i=>i.id!==id); saveCart(newCart);
-  } else {
-    saveCart(cart);
+
+
+
+  // SHOW TOTAL
+  if (totalElement) {
+
+    totalElement.innerText =
+      `₹${calculateTotal()}`;
+
   }
-  renderCart();
+
 }
 
-function setQuantity(id, raw){
-  let qty = parseInt(raw, 10) || 0;
-  qty = Math.max(0, qty);
+
+
+
+// ======================================
+// PROCEED TO CHECKOUT
+// ======================================
+
+function proceedToCheckout() {
+
   const cart = getCart();
-  const item = cart.find(i=>i.id===id);
-  if(!item) return;
-  if(qty === 0){
-    const newCart = cart.filter(i=>i.id!==id); saveCart(newCart);
-  } else {
-    item.qty = qty; saveCart(cart);
+
+
+  if (cart.length === 0) {
+
+    alert('Your cart is empty');
+
+    return false;
+
   }
-  renderCart();
+
+
+  window.location.href =
+    'checkout.html';
+
 }
 
-function updateCheckoutState(){
-  const link = document.getElementById('checkout-link');
-  const countEl = document.getElementById('cart-count');
-  const count = countEl ? parseInt(countEl.textContent) || 0 : 0;
-  if(!link) return;
-  if(count === 0){
-    link.style.backgroundColor = '#6c757d';
-    link.style.pointerEvents = 'none';
-    link.style.cursor = 'not-allowed';
-    link.title = 'Cart is empty';
-  } else {
-    link.style.backgroundColor = '';
-    link.style.pointerEvents = '';
-    link.style.cursor = '';
-    link.title = '';
-  }
-}
 
-function renderCartPreview(){
-  const el = document.getElementById('cart-count');
-  if(!el) return;
-  const cart = getCart();
-  const qty = cart.reduce((s,i)=>s+i.qty,0);
-  el.textContent = qty;
-}
 
-// init on pages
-document.addEventListener('DOMContentLoaded', ()=>{
-  renderCartPreview();
-  if(document.getElementById('cart-items')) renderCart();
-  // render homepage products if container exists
-  if(document.getElementById('homeProducts')) renderHomeProducts();
-  // start deals carousel simple rotation
-  startDealsCarousel();
-});
 
-// Sample product catalog used on homepage
-const PRODUCT_CATALOG = [
-  { id:'p1', title:'Smartphone XL', price:15999, img:'https://source.unsplash.com/800x600/?smartphone', category:'electronics', rating:4.5, old:19999 },
-  { id:'p2', title:'Wireless Headphones', price:1999, img:'https://source.unsplash.com/800x600/?headphones', category:'audio', rating:4.2, old:2499 },
-  { id:'p3', title:'Smart Watch Pro', price:2499, img:'https://source.unsplash.com/800x600/?smartwatch', category:'wearables', rating:4.1, old:3299 },
-  { id:'p4', title:'Bluetooth Speaker', price:1299, img:'https://source.unsplash.com/800x600/?speaker', category:'audio', rating:4.3, old:1599 },
-  { id:'p5', title:'Running Shoes', price:2999, img:'https://source.unsplash.com/800x600/?shoes', category:'fashion', rating:4.4, old:3999 },
-  { id:'p6', title:'Microwave Oven', price:6999, img:'https://source.unsplash.com/800x600/?microwave', category:'home', rating:4.0, old:8999 }
-  ,{ id:'p7', title:'Daily Grocery Pack', price:499, img:'https://source.unsplash.com/800x600/?grocery,food', category:'grocery', rating:4.2 }
-  ,{ id:'p8', title:'Electric Kettle', price:2199, img:'https://source.unsplash.com/800x600/?kettle,home', category:'home', rating:4.1 }
-  ,{ id:'p9', title:'Daily Face Cream', price:699, img:'https://source.unsplash.com/800x600/?skincare,beauty', category:'beauty', rating:4.3 }
-  ,{ id:'p10', title:'Remote Car', price:1299, img:'https://source.unsplash.com/800x600/?toy,children', category:'toys', rating:4.0 }
-];
+// ======================================
+// DEALS CAROUSEL
+// ======================================
 
-function createProductCard(p){
-  const div = document.createElement('div'); div.className='card'; div.dataset.id = p.id; div.dataset.category = p.category;
-  div.innerHTML = `
-    <div style="position:relative;width:100%">
-      <img src="${p.img}" alt="${p.title}" loading="lazy">
-    </div>
-    <div class="title">${p.title}</div>
-    <div class="price-row"><div class="price">₹${p.price}</div><div class="old">${p.old? '₹'+p.old : ''}</div></div>
-    <div class="rating">${'★'.repeat(Math.round(p.rating))}</div>
-    <button onclick="addToCart('${p.id}','${p.title}',${p.price},'${p.img}')">Add to cart</button>
-  `;
-  return div;
-}
+let currentDeal = 0;
 
-function renderHomeProducts(opts){
-  const container = document.getElementById('homeProducts'); if(!container) return;
-  const search = (document.getElementById('searchBox')||{}).value || '';
-  const sort = (document.getElementById('sortSelect')||{}).value || 'popular';
-  let list = PRODUCT_CATALOG.slice();
-  if(search) list = list.filter(p=>p.title.toLowerCase().includes(search.toLowerCase()));
-  if(sort==='price_asc') list.sort((a,b)=>a.price-b.price);
-  if(sort==='price_desc') list.sort((a,b)=>b.price-a.price);
-  container.innerHTML='';
-  list.forEach(p=> container.appendChild(createProductCard(p)));
-}
 
-// hook up search/sort on homepage
-document.addEventListener('input', function(e){ if(e.target && (e.target.id==='searchBox' || e.target.id==='sortSelect')) renderHomeProducts(); });
+function startDealsCarousel() {
 
-// Deals carousel rotation
-let _dealIndex = 0;
-function startDealsCarousel(){
-  const c = document.getElementById('dealsCarousel'); if(!c) return;
-  const items = c.querySelectorAll('.deal-item'); if(!items.length) return;
-  items.forEach((it,i)=>{ if(i!==0) it.style.display='none'; });
-  setInterval(()=>{
-    items[_dealIndex].style.display='none';
-    _dealIndex = (_dealIndex+1) % items.length;
-    items[_dealIndex].style.display='block';
+  const carousel =
+    document.getElementById(
+      'dealsCarousel'
+    );
+
+
+  if (!carousel) return;
+
+
+  const items =
+    carousel.querySelectorAll(
+      '.deal-item'
+    );
+
+
+  if (items.length === 0) return;
+
+
+  items.forEach((item, index) => {
+
+    item.style.display =
+      index === 0
+      ? 'block'
+      : 'none';
+
+  });
+
+
+  setInterval(() => {
+
+    items[currentDeal]
+      .style.display = 'none';
+
+
+    currentDeal =
+      (currentDeal + 1)
+      % items.length;
+
+
+    items[currentDeal]
+      .style.display = 'block';
+
   }, 4000);
+
 }
+
+
+
+
+// ======================================
+// INITIAL PAGE LOAD
+// ======================================
+
+document.addEventListener(
+
+  'DOMContentLoaded',
+
+  () => {
+
+    updateCartCount();
+
+    renderCart();
+
+    startDealsCarousel();
+
+  }
+
+);
