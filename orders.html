@@ -11,21 +11,17 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Orders | ShopEase</title>
-
+  <title>My Orders | ShopEase</title>
 
   <link
     rel="stylesheet"
     href="styles.css"
   >
 
-
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   >
-
-
 
 <style>
 
@@ -53,44 +49,7 @@ body{
 }
 
 
-.orders-title{
-
-  font-size:38px;
-
-  font-weight:700;
-
-  color:#111827;
-
-  margin:30px 0;
-
-}
-
-
-.orders-container{
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:25px;
-
-}
-
-
-.order-card{
-
-  background:white;
-
-  border-radius:24px;
-
-  padding:30px;
-
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
-}
-
-
-.order-header{
+.site-header{
 
   display:flex;
 
@@ -100,16 +59,66 @@ body{
 
   flex-wrap:wrap;
 
-  gap:15px;
-
-  margin-bottom:25px;
+  gap:20px;
 
 }
 
 
-.order-id{
+.logo{
 
-  font-size:20px;
+  margin:0;
+
+}
+
+
+.nav{
+
+  display:flex;
+
+  gap:15px;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+}
+
+
+.nav a{
+
+  text-decoration:none;
+
+  color:#111827;
+
+  font-weight:600;
+
+}
+
+
+.logout-btn{
+
+  background:#ef4444;
+
+  color:white;
+
+  border:none;
+
+  padding:10px 16px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+}
+
+
+.page-title{
+
+  margin-top:40px;
+
+  font-size:38px;
 
   font-weight:700;
 
@@ -118,172 +127,149 @@ body{
 }
 
 
-.order-date{
+.orders-grid{
 
-  color:#6b7280;
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:25px;
+
+  margin-top:30px;
+
+}
+
+
+.order-card{
+
+  background:white;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+
+}
+
+
+.order-image{
+
+  width:100%;
+
+  height:220px;
+
+  object-fit:cover;
+
+}
+
+
+.order-content{
+
+  padding:20px;
+
+}
+
+
+.order-title{
+
+  font-size:22px;
+
+  font-weight:700;
+
+  margin-bottom:10px;
+
+}
+
+
+.order-detail{
+
+  margin-bottom:10px;
+
+  color:#374151;
 
 }
 
 
 .order-status{
 
-  background:#10b981;
+  display:inline-block;
 
-  color:white;
-
-  padding:8px 16px;
+  padding:8px 14px;
 
   border-radius:12px;
 
   font-size:14px;
 
-  font-weight:600;
-
-}
-
-
-.order-products{
-
-  margin-top:20px;
-
-}
-
-
-.order-product{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:20px;
-
-  margin-bottom:20px;
-
-  padding-bottom:20px;
-
-  border-bottom:1px solid #e5e7eb;
-
-}
-
-
-.order-product:last-child{
-
-  border-bottom:none;
-
-  margin-bottom:0;
-
-  padding-bottom:0;
-
-}
-
-
-.order-product img{
-
-  width:100px;
-
-  height:100px;
-
-  object-fit:cover;
-
-  border-radius:16px;
-
-}
-
-
-.product-details{
-
-  flex:1;
-
-}
-
-
-.product-title{
-
-  font-size:18px;
-
-  font-weight:600;
-
-  color:#111827;
-
-  margin-bottom:8px;
-
-}
-
-
-.product-price{
-
-  color:#0ea5e9;
-
-  font-size:16px;
-
   font-weight:700;
 
-}
+  margin-top:10px;
 
-
-.product-qty{
-
-  color:#6b7280;
-
-  margin-top:5px;
+  color:white;
 
 }
 
 
-.order-total{
+.pending{
 
-  margin-top:25px;
+  background:#f59e0b;
 
-  text-align:right;
+}
 
-  font-size:24px;
 
-  font-weight:700;
+.packed{
 
-  color:#111827;
+  background:#3b82f6;
+
+}
+
+
+.shipped{
+
+  background:#6366f1;
+
+}
+
+
+.delivery{
+
+  background:#0ea5e9;
+
+}
+
+
+.delivered{
+
+  background:#10b981;
+
+}
+
+
+.tracking-box{
+
+  margin-top:15px;
+
+  background:#f3f4f6;
+
+  padding:15px;
+
+  border-radius:12px;
 
 }
 
 
 .empty-orders{
 
+  text-align:center;
+
   background:white;
+
+  padding:50px;
 
   border-radius:24px;
 
-  padding:60px;
-
-  text-align:center;
-
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
-}
-
-
-.empty-orders h2{
-
-  color:#111827;
-
-}
-
-
-.shop-btn{
-
-  display:inline-block;
-
-  margin-top:20px;
-
-  background:#0ea5e9;
-
-  color:white;
-
-  text-decoration:none;
-
-  padding:14px 24px;
-
-  border-radius:14px;
-
-  font-weight:700;
+  margin-top:40px;
 
 }
 
@@ -292,33 +278,7 @@ body{
 
   text-align:center;
 
-  padding:60px;
-
-  font-size:22px;
-
-  color:#6b7280;
-
-}
-
-
-@media(max-width:768px){
-
-  .order-product{
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-  }
-
-
-  .order-product img{
-
-    width:100%;
-
-    height:220px;
-
-  }
+  padding:40px;
 
 }
 
@@ -328,15 +288,7 @@ body{
 
 <body>
 
-
-
-
-
 <div class="orders-page">
-
-
-
-
 
 <header class="site-header">
 
@@ -347,17 +299,14 @@ body{
     </h1>
 
     <div
-      class="muted"
-      style="font-size:13px"
+      style="font-size:13px;color:#6b7280"
     >
-      Your Orders
+      Track Your Orders
     </div>
 
   </div>
 
-
-
-  <nav class="nav">
+  <nav class="nav" id="navbar">
 
     <a href="index.html">
       Home
@@ -365,10 +314,6 @@ body{
 
     <a href="products.html">
       Products
-    </a>
-
-    <a href="orders.html">
-      Orders
     </a>
 
     <a href="cart.html">
@@ -383,60 +328,22 @@ body{
 
 </header>
 
-
-
-
-
-
-
-
-<h1 class="orders-title">
-
+<h1 class="page-title">
   My Orders
-
 </h1>
 
-
-
-
-
-
 <div
-  class="orders-container"
-  id="ordersContainer"
+  class="orders-grid"
+  id="ordersGrid"
 >
 
   <div class="loading">
-
     Loading orders...
-
   </div>
 
 </div>
 
-
-
-
-
-
-
-<footer class="site-footer">
-
-  <div>
-    &copy; 2025 ShopEase.
-    All rights reserved.
-  </div>
-
-</footer>
-
 </div>
-
-
-
-
-
-
-
 
 <script type="module">
 
@@ -454,7 +361,7 @@ const {
 
 
 
-// CHECK LOGIN
+// LOGIN CHECK
 if(!user){
 
   window.location.href =
@@ -469,16 +376,188 @@ if(!user){
 
 
 
+
+
+// GET PROFILE
+const {
+  data: profile
+} = await supabase
+  .from('profiles')
+  .select('*')
+  .eq('id', user.id)
+  .single();
+
+
+
+
+
+
+
+
+
+
+// NAVBAR
+const navbar =
+document.getElementById(
+  'navbar'
+);
+
+
+
+
+// SELLER
+if(profile.role === 'seller'){
+
+  navbar.innerHTML += `
+
+    <a href="seller-dashboard.html">
+
+      Seller Dashboard
+
+    </a>
+
+  `;
+
+}
+
+
+
+
+
+
+
+
+
+
+// ADMIN
+if(profile.role === 'admin'){
+
+  navbar.innerHTML += `
+
+    <a href="admin-dashboard.html">
+
+      Admin Panel
+
+    </a>
+
+  `;
+
+}
+
+
+
+
+
+
+
+
+
+
+// LOGOUT
+navbar.innerHTML += `
+
+  <button
+    id="logoutBtn"
+    class="logout-btn"
+  >
+
+    Logout
+
+  </button>
+
+`;
+
+
+
+
+
+
+
+
+
+
+// LOGOUT ACTION
+document
+.getElementById('logoutBtn')
+.addEventListener('click',
+
+async ()=>{
+
+  await supabase.auth.signOut();
+
+
+
+
+  window.location.href =
+    'login.html';
+
+});
+
+
+
+
+
+
+
+
+
+
+// STATUS CLASS
+function getStatusClass(status){
+
+  if(status === 'Pending'){
+
+    return 'pending';
+
+  }
+
+  if(status === 'Packed'){
+
+    return 'packed';
+
+  }
+
+  if(status === 'Shipped'){
+
+    return 'shipped';
+
+  }
+
+  if(status === 'Out For Delivery'){
+
+    return 'delivery';
+
+  }
+
+  if(status === 'Delivered'){
+
+    return 'delivered';
+
+  }
+
+  return 'pending';
+
+}
+
+
+
+
+
+
+
+
+
+
 // LOAD ORDERS
 async function loadOrders(){
 
   const {
-    data,
+    data: orders,
     error
   } = await supabase
     .from('orders')
     .select('*')
-    .eq('user_id', user.id)
+    .eq('customer_id', user.id)
     .order('created_at', {
 
       ascending:false
@@ -499,37 +578,37 @@ async function loadOrders(){
 
 
 
-  const container =
+
+
+  const grid =
     document.getElementById(
-      'ordersContainer'
+      'ordersGrid'
     );
 
 
 
 
-  // EMPTY
-  if(!data || data.length === 0){
+  grid.innerHTML = '';
 
-    container.innerHTML = `
+
+
+
+
+
+  // EMPTY
+  if(orders.length === 0){
+
+    grid.innerHTML = `
 
       <div class="empty-orders">
 
         <h2>
-          No orders found
+          No Orders Yet
         </h2>
 
         <p>
           Start shopping now
         </p>
-
-        <a
-          href="products.html"
-          class="shop-btn"
-        >
-
-          Shop Products
-
-        </a>
 
       </div>
 
@@ -542,107 +621,48 @@ async function loadOrders(){
 
 
 
-  container.innerHTML = '';
 
 
 
 
-  // SHOW ORDERS
-  data.forEach(order => {
 
-    container.innerHTML += `
+
+  // DISPLAY ORDERS
+  orders.forEach(order => {
+
+    grid.innerHTML += `
 
       <div class="order-card">
 
+        <img
+          src="${order.product_image}"
+          class="order-image"
+        >
 
+        <div class="order-content">
 
+          <div class="order-title">
 
-        <div class="order-header">
-
-          <div>
-
-            <div class="order-id">
-
-              Order #${order.id}
-
-            </div>
-
-
-
-            <div class="order-date">
-
-              ${new Date(
-                order.created_at
-              ).toLocaleString()}
-
-            </div>
+            ${order.product_title}
 
           </div>
 
 
 
 
-          <div class="order-status">
 
-            ${order.status || 'Pending'}
+
+
+
+
+
+          <div class="order-detail">
+
+            Quantity:
+            ${order.quantity}
 
           </div>
 
-        </div>
-
-
-
-
-
-
-
-        <div class="order-products">
-
-          ${order.items.map(item => `
-
-            <div class="order-product">
-
-              <img
-                src="${item.image}"
-              >
-
-
-
-
-              <div class="product-details">
-
-                <div class="product-title">
-
-                  ${item.title}
-
-                </div>
-
-
-
-
-                <div class="product-price">
-
-                  ₹${item.price}
-
-                </div>
-
-
-
-
-                <div class="product-qty">
-
-                  Quantity:
-                  ${item.qty}
-
-                </div>
-
-              </div>
-
-            </div>
-
-          `).join('')}
-
-        </div>
 
 
 
@@ -651,10 +671,80 @@ async function loadOrders(){
 
 
 
-        <div class="order-total">
 
-          Total:
-          ₹${order.total}
+          <div class="order-detail">
+
+            Total:
+            ₹${order.total}
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <div class="order-detail">
+
+            Payment:
+            ${order.payment_method || 'COD'}
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <div class="order-detail">
+
+            Address:
+            ${order.customer_address}
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <div
+            class="
+              order-status
+              ${getStatusClass(order.status)}
+            "
+          >
+
+            ${order.status}
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <div class="tracking-box">
+
+            ${order.tracking_message}
+
+          </div>
 
         </div>
 
@@ -669,8 +759,44 @@ async function loadOrders(){
 
 loadOrders();
 
-</script>
 
+
+
+
+
+
+
+
+
+// REALTIME ORDER TRACKING
+supabase
+.channel('orders-live')
+
+.on(
+
+  'postgres_changes',
+
+  {
+
+    event:'*',
+
+    schema:'public',
+
+    table:'orders'
+
+  },
+
+  ()=>{
+
+    loadOrders();
+
+  }
+
+)
+
+.subscribe();
+
+</script>
 
 </body>
 </html>

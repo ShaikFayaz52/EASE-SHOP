@@ -13,18 +13,15 @@
 
   <title>ShopEase</title>
 
-
   <link
     rel="stylesheet"
     href="styles.css"
   >
 
-
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   >
-
 
 <style>
 
@@ -48,6 +45,54 @@ body{
   margin:auto;
 
   padding:20px;
+
+}
+
+
+.site-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:20px;
+
+}
+
+
+.logo{
+
+  margin:0;
+
+  color:#111827;
+
+}
+
+
+.nav{
+
+  display:flex;
+
+  gap:15px;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+}
+
+
+.nav a{
+
+  text-decoration:none;
+
+  color:#111827;
+
+  font-weight:600;
 
 }
 
@@ -107,6 +152,8 @@ body{
 
   gap:15px;
 
+  flex-wrap:wrap;
+
 }
 
 
@@ -150,8 +197,6 @@ body{
   border-radius:20px;
 
   text-align:center;
-
-  backdrop-filter:blur(10px);
 
 }
 
@@ -204,15 +249,6 @@ body{
 
   font-weight:600;
 
-  transition:0.3s;
-
-}
-
-
-.category-card:hover{
-
-  transform:translateY(-5px);
-
 }
 
 
@@ -230,7 +266,6 @@ body{
 
 
 .search-bar input,
-
 .search-bar select{
 
   padding:14px;
@@ -273,15 +308,6 @@ body{
 
   box-shadow:0 8px 20px rgba(0,0,0,0.06);
 
-  transition:0.3s;
-
-}
-
-
-.product-card:hover{
-
-  transform:translateY(-5px);
-
 }
 
 
@@ -308,6 +334,15 @@ body{
   font-size:20px;
 
   font-weight:600;
+
+  margin-bottom:10px;
+
+}
+
+
+.product-category{
+
+  color:#6b7280;
 
   margin-bottom:10px;
 
@@ -357,13 +392,41 @@ body{
 }
 
 
+.logout-btn{
+
+  background:#ef4444;
+
+  color:white;
+
+  border:none;
+
+  padding:8px 14px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+}
+
+
+.site-footer{
+
+  margin-top:60px;
+
+  text-align:center;
+
+  color:#6b7280;
+
+}
+
+
 .loading{
 
   text-align:center;
 
-  padding:50px;
-
-  font-size:20px;
+  padding:40px;
 
 }
 
@@ -390,12 +453,7 @@ body{
 
 <body>
 
-
-
-
 <div class="home-page">
-
-
 
 <header class="site-header">
 
@@ -406,17 +464,17 @@ body{
     </h1>
 
     <div
-      class="muted"
-      style="font-size:13px"
+      style="font-size:13px;color:#6b7280"
     >
       Fast — Friendly — Reliable
     </div>
 
   </div>
 
-
-
-  <nav class="nav">
+  <nav
+    class="nav"
+    id="navbar"
+  >
 
     <a href="index.html">
       Home
@@ -439,17 +497,9 @@ body{
       )
     </a>
 
-    <a href="profile.html">
-      Profile
-    </a>
-
   </nav>
 
 </header>
-
-
-
-
 
 <section class="hero-section">
 
@@ -460,11 +510,9 @@ body{
     </h1>
 
     <p>
-      Shop top brands with
-      fast delivery and
-      secure checkout.
+      Shop top brands with fast delivery
+      and secure checkout.
     </p>
-
 
     <div class="hero-buttons">
 
@@ -474,7 +522,6 @@ body{
       >
         Shop Now
       </a>
-
 
       <a
         href="products.html"
@@ -486,8 +533,6 @@ body{
     </div>
 
   </div>
-
-
 
   <div class="sale-box">
 
@@ -503,15 +548,9 @@ body{
 
 </section>
 
-
-
-
-
-
 <h2 class="section-title">
   Categories
 </h2>
-
 
 <div class="categories">
 
@@ -541,18 +580,9 @@ body{
 
 </div>
 
-
-
-
-
-
-
 <h2 class="section-title">
   Popular Products
 </h2>
-
-
-
 
 <div class="search-bar">
 
@@ -561,7 +591,6 @@ body{
     id="searchInput"
     placeholder="Search products..."
   >
-
 
   <select id="sortSelect">
 
@@ -581,11 +610,6 @@ body{
 
 </div>
 
-
-
-
-
-
 <div
   id="productGrid"
   class="product-grid"
@@ -596,11 +620,6 @@ body{
   </div>
 
 </div>
-
-
-
-
-
 
 <footer class="site-footer">
 
@@ -616,11 +635,6 @@ body{
 </footer>
 
 </div>
-
-
-
-
-
 
 <script type="module">
 
@@ -638,18 +652,26 @@ function updateCartCount(){
       localStorage.getItem('cart') || '[]'
     );
 
-
   const total =
-    cart.reduce((s,i)=>s+i.qty,0);
+    cart.reduce(
+      (sum,item)=>sum + item.qty,
+      0
+    );
 
-
-  document.getElementById('cart-count')
-  .innerText = total;
+  document.getElementById(
+    'cart-count'
+  ).innerText = total;
 
 }
 
 
 updateCartCount();
+
+
+
+
+
+
 
 
 
@@ -660,7 +682,8 @@ window.addToCart = function(
   id,
   title,
   price,
-  image
+  image,
+  seller_id
 
 ){
 
@@ -669,10 +692,8 @@ window.addToCart = function(
       localStorage.getItem('cart') || '[]'
     );
 
-
   const existing =
-    cart.find(i => i.id == id);
-
+    cart.find(item => item.id == id);
 
   if(existing){
 
@@ -687,24 +708,29 @@ window.addToCart = function(
       title,
       price,
       image,
+      seller_id,
       qty:1
 
     });
 
   }
 
-
   localStorage.setItem(
     'cart',
     JSON.stringify(cart)
   );
-
 
   updateCartCount();
 
   alert('Added to cart');
 
 };
+
+
+
+
+
+
 
 
 
@@ -717,9 +743,7 @@ async function loadProducts(){
     error
   } = await supabase
     .from('products')
-    .select('*');
-
-
+    .select('*')
 
   if(error){
 
@@ -729,18 +753,12 @@ async function loadProducts(){
 
   }
 
-
-
-  let products = data;
-
-
+  let products = data || [];
 
   const searchInput =
     document.getElementById(
       'searchInput'
     );
-
-
 
   const sortSelect =
     document.getElementById(
@@ -749,17 +767,20 @@ async function loadProducts(){
 
 
 
+
+
+
   function renderProducts(){
 
-
     let filtered = [...products];
+
+
 
 
 
     // SEARCH
     const search =
       searchInput.value.toLowerCase();
-
 
     filtered =
       filtered.filter(product =>
@@ -772,6 +793,8 @@ async function loadProducts(){
 
 
 
+
+
     // SORT
     if(sortSelect.value === 'low'){
 
@@ -780,7 +803,6 @@ async function loadProducts(){
       );
 
     }
-
 
     if(sortSelect.value === 'high'){
 
@@ -793,14 +815,38 @@ async function loadProducts(){
 
 
 
+
+
     const grid =
       document.getElementById(
         'productGrid'
       );
 
-
-
     grid.innerHTML = '';
+
+
+
+
+
+
+    // EMPTY
+    if(filtered.length === 0){
+
+      grid.innerHTML = `
+
+        <div class="loading">
+
+          No products found
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
 
 
 
@@ -812,10 +858,9 @@ async function loadProducts(){
         <div class="product-card">
 
           <img
-            src="${product.image}"
+            src="${product.image || 'https://via.placeholder.com/300'}"
             class="product-image"
           >
-
 
           <div class="product-content">
 
@@ -825,13 +870,17 @@ async function loadProducts(){
 
             </div>
 
+            <div class="product-category">
+
+              ${product.category || 'General'}
+
+            </div>
 
             <div class="product-price">
 
               ₹${product.price}
 
             </div>
-
 
             <button
               class="add-cart-btn"
@@ -841,7 +890,8 @@ async function loadProducts(){
                   '${product.id}',
                   '${product.title}',
                   '${product.price}',
-                  '${product.image}'
+                  '${product.image}',
+                  '${product.seller_id}'
                 )
               "
             >
@@ -862,7 +912,13 @@ async function loadProducts(){
 
 
 
+
+
+
   renderProducts();
+
+
+
 
 
 
@@ -870,7 +926,6 @@ async function loadProducts(){
     'input',
     renderProducts
   );
-
 
   sortSelect.addEventListener(
     'change',
@@ -881,6 +936,253 @@ async function loadProducts(){
 
 
 loadProducts();
+
+
+
+
+
+
+
+
+
+
+// NAVBAR
+const navbar =
+document.getElementById(
+  'navbar'
+);
+
+
+
+
+// GET USER
+const {
+  data:{ user }
+} = await supabase.auth.getUser();
+
+
+
+
+
+
+
+
+
+
+if(user){
+
+  // GET PROFILE
+  const {
+    data: profile
+  } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
+
+
+
+
+
+
+  // PROFILE LINK
+  navbar.innerHTML += `
+
+    <a href="profile.html">
+
+      Profile
+
+    </a>
+
+  `;
+
+
+
+
+
+
+
+
+  // SELLER
+  if(profile.role === 'seller'){
+
+    navbar.innerHTML += `
+
+      <a href="seller-dashboard.html">
+
+        Seller Dashboard
+
+      </a>
+
+    `;
+
+  }
+
+
+
+
+
+
+
+
+  // ADMIN
+  if(profile.role === 'admin'){
+
+    navbar.innerHTML += `
+
+      <a href="admin-dashboard.html">
+
+        Admin Panel
+
+      </a>
+
+    `;
+
+  }
+
+
+
+
+
+
+
+
+  // USER NAME
+  navbar.innerHTML += `
+
+    <span
+      style="
+        font-weight:600;
+        color:#2563eb;
+      "
+    >
+
+      Hi,
+      ${profile.name || 'User'}
+
+    </span>
+
+  `;
+
+
+
+
+
+
+
+
+  // LOGOUT
+  navbar.innerHTML += `
+
+    <button
+      id="logoutBtn"
+      class="logout-btn"
+    >
+
+      Logout
+
+    </button>
+
+  `;
+
+
+
+
+
+
+
+
+  document
+  .getElementById('logoutBtn')
+  .addEventListener('click',
+
+  async ()=>{
+
+    await supabase.auth.signOut();
+
+    window.location.href =
+      'login.html';
+
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+else{
+
+  navbar.innerHTML += `
+
+    <a href="login.html">
+
+      Login
+
+    </a>
+
+  `;
+
+
+
+
+
+
+
+
+  navbar.innerHTML += `
+
+    <a href="register.html">
+
+      Register
+
+    </a>
+
+  `;
+
+}
+
+
+
+
+
+
+
+
+
+
+// REALTIME PRODUCTS
+supabase
+.channel('products-live')
+
+.on(
+
+  'postgres_changes',
+
+  {
+
+    event:'*',
+
+    schema:'public',
+
+    table:'products'
+
+  },
+
+  ()=>{
+
+    loadProducts();
+
+  }
+
+)
+
+.subscribe();
 
 </script>
 

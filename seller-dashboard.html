@@ -13,19 +13,15 @@
 
   <title>Seller Dashboard | ShopEase</title>
 
-
   <link
     rel="stylesheet"
     href="styles.css"
   >
 
-
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   >
-
-
 
 <style>
 
@@ -53,7 +49,7 @@ body{
 }
 
 
-.dashboard-header{
+.site-header{
 
   display:flex;
 
@@ -61,14 +57,66 @@ body{
 
   align-items:center;
 
-  margin-bottom:30px;
+  flex-wrap:wrap;
+
+  gap:20px;
+
+}
+
+
+.logo{
+
+  margin:0;
+
+}
+
+
+.nav{
+
+  display:flex;
+
+  gap:15px;
+
+  align-items:center;
 
   flex-wrap:wrap;
 
 }
 
 
+.nav a{
+
+  text-decoration:none;
+
+  color:#111827;
+
+  font-weight:600;
+
+}
+
+
+.logout-btn{
+
+  background:#ef4444;
+
+  color:white;
+
+  border:none;
+
+  padding:10px 16px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+}
+
+
 .dashboard-title{
+
+  margin-top:30px;
 
   font-size:38px;
 
@@ -88,7 +136,7 @@ body{
 
   gap:20px;
 
-  margin-bottom:35px;
+  margin-top:30px;
 
 }
 
@@ -99,9 +147,9 @@ body{
 
   padding:25px;
 
-  border-radius:24px;
+  border-radius:20px;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
 
 }
 
@@ -112,8 +160,6 @@ body{
 
   color:#6b7280;
 
-  font-size:16px;
-
 }
 
 
@@ -121,16 +167,14 @@ body{
 
   margin-top:15px;
 
-  font-size:34px;
+  font-size:32px;
 
   font-weight:700;
-
-  color:#111827;
 
 }
 
 
-.add-product-card{
+.section-card{
 
   background:white;
 
@@ -138,9 +182,9 @@ body{
 
   border-radius:24px;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  margin-top:40px;
 
-  margin-bottom:35px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
 
 }
 
@@ -152,8 +196,6 @@ body{
   font-weight:700;
 
   margin-bottom:25px;
-
-  color:#111827;
 
 }
 
@@ -184,13 +226,12 @@ body{
 
   font-weight:600;
 
-  color:#374151;
-
 }
 
 
 .form-group input,
-.form-group textarea{
+.form-group textarea,
+.form-group select{
 
   width:100%;
 
@@ -198,7 +239,7 @@ body{
 
   border:1px solid #d1d5db;
 
-  border-radius:14px;
+  border-radius:12px;
 
   font-size:15px;
 
@@ -226,7 +267,7 @@ body{
 
   padding:15px 24px;
 
-  border-radius:14px;
+  border-radius:12px;
 
   font-size:16px;
 
@@ -253,16 +294,16 @@ body{
 
   background:white;
 
-  border-radius:24px;
+  border-radius:18px;
 
   overflow:hidden;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
 
 }
 
 
-.product-card img{
+.product-image{
 
   width:100%;
 
@@ -316,11 +357,46 @@ body{
 
   padding:12px;
 
-  border-radius:12px;
+  border-radius:10px;
 
   cursor:pointer;
 
-  font-weight:700;
+  font-weight:600;
+
+}
+
+
+.order-card{
+
+  background:#f9fafb;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  margin-bottom:20px;
+
+}
+
+
+.order-status{
+
+  padding:10px;
+
+  border-radius:10px;
+
+  border:1px solid #d1d5db;
+
+  margin-top:10px;
+
+}
+
+
+.loading{
+
+  text-align:center;
+
+  padding:40px;
 
 }
 
@@ -341,15 +417,7 @@ body{
 
 <body>
 
-
-
-
-
 <div class="dashboard">
-
-
-
-
 
 <header class="site-header">
 
@@ -360,20 +428,17 @@ body{
     </h1>
 
     <div
-      class="muted"
-      style="font-size:13px"
+      style="font-size:13px;color:#6b7280"
     >
       Seller Dashboard
     </div>
 
   </div>
 
-
-
   <nav class="nav">
 
     <a href="index.html">
-      Store
+      Home
     </a>
 
     <a href="orders.html">
@@ -384,33 +449,20 @@ body{
       Profile
     </a>
 
+    <button
+      id="logoutBtn"
+      class="logout-btn"
+    >
+      Logout
+    </button>
+
   </nav>
 
 </header>
 
-
-
-
-
-
-
-
-<div class="dashboard-header">
-
-  <div class="dashboard-title">
-
-    Seller Dashboard
-
-  </div>
-
-</div>
-
-
-
-
-
-
-
+<h1 class="dashboard-title">
+  Seller Dashboard
+</h1>
 
 <div class="stats-grid">
 
@@ -426,10 +478,6 @@ body{
 
   </div>
 
-
-
-
-
   <div class="stat-card">
 
     <h3>
@@ -442,51 +490,17 @@ body{
 
   </div>
 
-
-
-
-
-  <div class="stat-card">
-
-    <h3>
-      Revenue
-    </h3>
-
-    <p id="revenue">
-      ₹0
-    </p>
-
-  </div>
-
 </div>
 
-
-
-
-
-
-
-
-<div class="add-product-card">
+<div class="section-card">
 
   <div class="section-title">
-
     Add Product
-
   </div>
-
-
-
-
-
 
   <form id="productForm">
 
     <div class="form-grid">
-
-
-
-
 
       <div class="form-group">
 
@@ -502,15 +516,10 @@ body{
 
       </div>
 
-
-
-
-
-
       <div class="form-group">
 
         <label>
-          Price
+          Product Price
         </label>
 
         <input
@@ -521,15 +530,24 @@ body{
 
       </div>
 
+      <div class="form-group">
 
+        <label>
+          Product Category
+        </label>
 
+        <input
+          type="text"
+          id="category"
+          required
+        >
 
-
+      </div>
 
       <div class="form-group">
 
         <label>
-          Upload product Image 
+          Upload Image
         </label>
 
         <input
@@ -541,31 +559,7 @@ body{
 
       </div>
 
-
-
-
-
-
-      <div class="form-group">
-
-        <label>
-          Category
-        </label>
-
-        <input
-          type="text"
-          id="category"
-          required
-        >
-
-      </div>
-
     </div>
-
-
-
-
-
 
     <div class="form-group">
 
@@ -579,59 +573,53 @@ body{
 
     </div>
 
-
-
-
-
-
     <button
       type="submit"
       class="add-btn"
     >
-
       Add Product
-
     </button>
 
   </form>
 
 </div>
 
+<div class="section-card">
 
+  <div class="section-title">
+    My Products
+  </div>
 
+  <div
+    class="products-grid"
+    id="productsGrid"
+  >
 
+    <div class="loading">
+      Loading products...
+    </div>
 
-
-
-
-
-<div class="section-title">
-
-  My Products
-
-</div>
-
-
-
-
-
-
-<div
-  class="products-grid"
-  id="productsGrid"
->
+  </div>
 
 </div>
 
+<div class="section-card">
+
+  <div class="section-title">
+    Customer Orders
+  </div>
+
+  <div id="sellerOrders">
+
+    <div class="loading">
+      Loading orders...
+    </div>
+
+  </div>
+
 </div>
 
-
-
-
-
-
-
-
+</div>
 
 <script type="module">
 
@@ -649,7 +637,7 @@ const {
 
 
 
-// CHECK LOGIN
+// LOGIN CHECK
 if(!user){
 
   window.location.href =
@@ -660,7 +648,13 @@ if(!user){
 
 
 
-// CHECK ROLE
+
+
+
+
+
+
+// GET PROFILE
 const {
   data: profile
 } = await supabase
@@ -672,6 +666,7 @@ const {
 
 
 
+// ROLE CHECK
 if(profile.role !== 'seller'){
 
   alert('Seller access only');
@@ -680,6 +675,8 @@ if(profile.role !== 'seller'){
     'index.html';
 
 }
+
+
 
 
 
@@ -713,9 +710,13 @@ async function loadProducts(){
 
 
 
+
+
   document.getElementById(
     'totalProducts'
   ).innerText = data.length;
+
+
 
 
 
@@ -733,16 +734,39 @@ async function loadProducts(){
 
 
 
+
+
+  if(data.length === 0){
+
+    grid.innerHTML = `
+
+      <div class="loading">
+
+        No products added yet
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+
+
+
+
   data.forEach(product => {
 
     grid.innerHTML += `
 
       <div class="product-card">
 
-        <img src="${product.image}">
-
-
-
+        <img
+          src="${product.image}"
+          class="product-image"
+        >
 
         <div class="product-content">
 
@@ -752,17 +776,11 @@ async function loadProducts(){
 
           </div>
 
-
-
-
           <div class="product-price">
 
             ₹${product.price}
 
           </div>
-
-
-
 
           <button
             class="delete-btn"
@@ -794,7 +812,96 @@ loadProducts();
 
 
 
+
 // ADD PRODUCT
+document
+.getElementById('productForm')
+.addEventListener('submit',
+
+async (e)=>{
+
+  e.preventDefault();
+
+
+
+
+  const file =
+    document.getElementById(
+      'imageFile'
+    ).files[0];
+
+
+
+
+  if(!file){
+
+    alert('Select image');
+
+    return;
+
+  }
+
+
+
+
+
+
+  const fileName =
+
+    `${Date.now()}-${file.name}`;
+
+
+
+
+
+
+
+
+  // UPLOAD IMAGE
+  const {
+    error: uploadError
+  } = await supabase.storage
+    .from('product-images')
+    .upload(fileName, file);
+
+
+
+
+  if(uploadError){
+
+    alert(uploadError.message);
+
+    return;
+
+  }
+
+
+
+
+
+
+
+
+  // GET PUBLIC URL
+  const {
+    data: imageData
+  } = supabase.storage
+    .from('product-images')
+    .getPublicUrl(fileName);
+
+
+
+
+  const imageUrl =
+    imageData.publicUrl;
+
+
+
+
+
+
+
+
   // PRODUCT OBJECT
   const product = {
 
@@ -806,10 +913,13 @@ loadProducts();
 
 
 
-    price:
+    price:Number(
+
       document.getElementById(
         'price'
-      ).value,
+      ).value
+
+    ),
 
 
 
@@ -830,14 +940,18 @@ loadProducts();
 
 
 
-    image: imageUrl,
+    image:imageUrl,
 
 
 
 
-    seller_id: user.id
+    seller_id:user.id
 
   };
+
+
+
+
 
 
 
@@ -854,6 +968,8 @@ loadProducts();
 
   if(error){
 
+    console.log(error);
+
     alert(error.message);
 
     return;
@@ -863,13 +979,21 @@ loadProducts();
 
 
 
-  alert('Product added successfully');
+
+
+
+
+  alert(
+    'Product added successfully'
+  );
 
 
 
 
   document
-    .getElementById('productForm')
+    .getElementById(
+      'productForm'
+    )
     .reset();
 
 
@@ -905,23 +1029,10 @@ async function(id){
 
 
 
-  const {
-    error
-  } = await supabase
+  await supabase
     .from('products')
     .delete()
     .eq('id', id);
-
-
-
-
-  if(error){
-
-    alert(error.message);
-
-    return;
-
-  }
 
 
 
@@ -930,8 +1041,434 @@ async function(id){
 
 };
 
-</script>
 
+
+
+
+
+
+
+
+
+// LOAD SELLER ORDERS
+async function loadSellerOrders(){
+
+  const {
+    data: orders
+  } = await supabase
+    .from('orders')
+    .select('*')
+    .eq('seller_id', user.id)
+    .order('created_at', {
+
+      ascending:false
+
+    });
+
+
+
+
+
+
+  document.getElementById(
+    'totalOrders'
+  ).innerText = orders.length;
+
+
+
+
+
+
+  const container =
+    document.getElementById(
+      'sellerOrders'
+    );
+
+
+
+
+  container.innerHTML = '';
+
+
+
+
+
+
+  if(orders.length === 0){
+
+    container.innerHTML = `
+
+      <div class="loading">
+
+        No customer orders yet
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+
+
+
+
+  orders.forEach(order => {
+
+    container.innerHTML += `
+
+      <div class="order-card">
+
+        <img
+          src="${order.product_image}"
+          class="product-image"
+        >
+
+        <div class="product-content">
+
+          <h3>
+
+            ${order.product_title}
+
+          </h3>
+
+
+
+
+
+
+
+
+
+
+          <p>
+
+            Customer:
+            ${order.customer_name}
+
+          </p>
+
+
+
+
+
+
+
+
+
+
+          <p>
+
+            Email:
+            ${order.customer_email}
+
+          </p>
+
+
+
+
+
+
+
+
+
+
+          <p>
+
+            Phone:
+            ${order.customer_phone}
+
+          </p>
+
+
+
+
+
+
+
+
+
+
+          <p>
+
+            Address:
+            ${order.customer_address}
+
+          </p>
+
+
+
+
+
+
+
+
+
+
+          <p>
+
+            Quantity:
+            ${order.quantity}
+
+          </p>
+
+
+
+
+
+
+
+
+
+
+          <p>
+
+            Total:
+            ₹${order.total}
+
+          </p>
+
+
+
+
+
+
+
+
+
+
+          <select
+            class="order-status"
+
+            onchange="
+              updateStatus(
+                '${order.id}',
+                this.value
+              )
+            "
+          >
+
+            <option>
+              ${order.status}
+            </option>
+
+            <option>
+              Pending
+            </option>
+
+            <option>
+              Packed
+            </option>
+
+            <option>
+              Shipped
+            </option>
+
+            <option>
+              Out For Delivery
+            </option>
+
+            <option>
+              Delivered
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+loadSellerOrders();
+
+
+
+
+
+
+
+
+
+
+// UPDATE STATUS
+window.updateStatus =
+async function(id, status){
+
+  let tracking = '';
+
+
+
+
+
+
+  if(status === 'Pending'){
+
+    tracking =
+    'Order placed successfully';
+
+  }
+
+  if(status === 'Packed'){
+
+    tracking =
+    'Seller packed your order';
+
+  }
+
+  if(status === 'Shipped'){
+
+    tracking =
+    'Order shipped';
+
+  }
+
+  if(status === 'Out For Delivery'){
+
+    tracking =
+    'Delivery partner is arriving';
+
+  }
+
+  if(status === 'Delivered'){
+
+    tracking =
+    'Order delivered successfully';
+
+  }
+
+
+
+
+
+
+  await supabase
+  .from('orders')
+  .update({
+
+    status:status,
+
+    tracking_message:tracking
+
+  })
+  .eq('id', id);
+
+
+
+
+  loadSellerOrders();
+
+};
+
+
+
+
+
+
+
+
+
+
+// REALTIME PRODUCTS
+supabase
+.channel('seller-products')
+
+.on(
+
+  'postgres_changes',
+
+  {
+
+    event:'*',
+
+    schema:'public',
+
+    table:'products'
+
+  },
+
+  ()=>{
+
+    loadProducts();
+
+  }
+
+)
+
+.subscribe();
+
+
+
+
+
+
+
+
+
+
+// REALTIME ORDERS
+supabase
+.channel('seller-orders')
+
+.on(
+
+  'postgres_changes',
+
+  {
+
+    event:'*',
+
+    schema:'public',
+
+    table:'orders'
+
+  },
+
+  ()=>{
+
+    loadSellerOrders();
+
+  }
+
+)
+
+.subscribe();
+
+
+
+
+
+
+
+
+
+
+// LOGOUT
+document
+.getElementById('logoutBtn')
+.addEventListener('click',
+
+async ()=>{
+
+  await supabase.auth.signOut();
+
+
+
+
+  window.location.href =
+    'login.html';
+
+});
+
+</script>
 
 </body>
 </html>
+

@@ -1,6 +1,6 @@
 
 import { supabase }
-from './supabase.js';
+from './.env/supabase.js';
 
 
 

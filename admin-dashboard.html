@@ -991,6 +991,117 @@ async ()=>{
 });
 
 
+// ======================================
+// REALTIME USERS
+// ======================================
+
+supabase
+.channel('profiles-changes')
+
+.on(
+
+  'postgres_changes',
+
+  {
+
+    event:'*',
+
+    schema:'public',
+
+    table:'profiles'
+
+  },
+
+  ()=>{
+
+    loadDashboard();
+
+  }
+
+)
+
+.subscribe();
+
+
+
+
+
+
+
+
+
+
+// ======================================
+// REALTIME PRODUCTS
+// ======================================
+
+supabase
+.channel('products-changes')
+
+.on(
+
+  'postgres_changes',
+
+  {
+
+    event:'*',
+
+    schema:'public',
+
+    table:'products'
+
+  },
+
+  ()=>{
+
+    loadDashboard();
+
+  }
+
+)
+
+.subscribe();
+
+
+
+
+
+
+
+
+
+
+// ======================================
+// REALTIME ORDERS
+// ======================================
+
+supabase
+.channel('orders-changes')
+
+.on(
+
+  'postgres_changes',
+
+  {
+
+    event:'*',
+
+    schema:'public',
+
+    table:'orders'
+
+  },
+
+  ()=>{
+
+    loadDashboard();
+
+  }
+
+)
+
+.subscribe();
+
 </script>
 
 

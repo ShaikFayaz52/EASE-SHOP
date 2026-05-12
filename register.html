@@ -486,6 +486,7 @@ body{
 
       <label>
         Password
+         Select Minimum Strong 6 characters including A-Z,a-z,0-9,including Symbols
       </label>
 
       <input
@@ -493,6 +494,7 @@ body{
         id="password"
         placeholder="Create password"
         required
+        minlength="6"
       >
 
     </div>
@@ -709,14 +711,15 @@ async (e)=>{
 
 });
 
+if(password.length < 6){
 
+  alert(
+    'Password must contain at least 6 characters'
+  );
 
+  return;
 
-
-
-
-
-
+}
 
 // GOOGLE REGISTER
 document

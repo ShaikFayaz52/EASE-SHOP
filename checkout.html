@@ -23,8 +23,6 @@
     rel="stylesheet"
   >
 
-
-
 <style>
 
 body{
@@ -33,55 +31,103 @@ body{
 
   padding:0;
 
-  font-family:'Poppins',sans-serif;
-
   background:#f4f7fb;
+
+  font-family:'Poppins',sans-serif;
 
 }
 
 
 .checkout-page{
 
-  max-width:900px;
+  max-width:1200px;
 
-  margin:40px auto;
+  margin:auto;
 
   padding:20px;
 
 }
 
 
-.checkout-card{
+.site-header{
 
-  background:white;
+  display:flex;
 
-  border-radius:18px;
+  justify-content:space-between;
 
-  padding:30px;
+  align-items:center;
 
-  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  flex-wrap:wrap;
+
+  gap:20px;
 
 }
 
 
-.checkout-title{
+.logo{
 
-  font-size:32px;
+  margin:0;
 
-  font-weight:700;
+}
 
-  margin-bottom:10px;
+
+.nav{
+
+  display:flex;
+
+  gap:15px;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+}
+
+
+.nav a{
+
+  text-decoration:none;
 
   color:#111827;
 
+  font-weight:600;
+
 }
 
 
-.checkout-subtitle{
+.checkout-container{
 
-  color:#6b7280;
+  display:grid;
 
-  margin-bottom:30px;
+  grid-template-columns:1fr 400px;
+
+  gap:30px;
+
+  margin-top:40px;
+
+}
+
+
+.checkout-form{
+
+  background:white;
+
+  padding:30px;
+
+  border-radius:24px;
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
+
+}
+
+
+.section-title{
+
+  font-size:28px;
+
+  font-weight:700;
+
+  margin-bottom:25px;
 
 }
 
@@ -101,15 +147,11 @@ body{
 
   font-weight:600;
 
-  color:#374151;
-
 }
 
 
 .form-group input,
-
 .form-group textarea,
-
 .form-group select{
 
   width:100%;
@@ -136,50 +178,9 @@ body{
 }
 
 
-.order-summary{
-
-  background:#f9fafb;
-
-  padding:20px;
-
-  border-radius:14px;
-
-  margin-top:25px;
-
-}
-
-
-.summary-item{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-bottom:12px;
-
-}
-
-
-.total-row{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  margin-top:20px;
-
-  font-size:22px;
-
-  font-weight:700;
-
-}
-
-
 .place-order-btn{
 
   width:100%;
-
-  margin-top:30px;
 
   background:#10b981;
 
@@ -191,7 +192,7 @@ body{
 
   border-radius:14px;
 
-  font-size:18px;
+  font-size:17px;
 
   font-weight:700;
 
@@ -207,39 +208,76 @@ body{
 }
 
 
-.empty-cart{
+.order-summary{
 
-  text-align:center;
+  background:white;
 
-  padding:60px;
+  padding:30px;
+
+  border-radius:24px;
+
+  height:fit-content;
+
+  box-shadow:0 8px 20px rgba(0,0,0,0.06);
 
 }
 
 
-.empty-cart a{
+.summary-item{
 
-  text-decoration:none;
+  display:flex;
 
-  background:#0ea5e9;
+  justify-content:space-between;
 
-  color:white;
+  margin-bottom:15px;
 
-  padding:12px 20px;
+}
 
-  border-radius:10px;
 
-  display:inline-block;
+.cart-item{
+
+  display:flex;
+
+  gap:15px;
+
+  margin-bottom:20px;
+
+  border-bottom:1px solid #e5e7eb;
+
+  padding-bottom:15px;
+
+}
+
+
+.cart-image{
+
+  width:80px;
+
+  height:80px;
+
+  object-fit:cover;
+
+  border-radius:12px;
+
+}
+
+
+.total{
+
+  font-size:24px;
+
+  font-weight:700;
 
   margin-top:20px;
 
 }
 
 
-@media(max-width:768px){
+@media(max-width:900px){
 
-  .checkout-card{
+  .checkout-container{
 
-    padding:20px;
+    grid-template-columns:1fr;
 
   }
 
@@ -251,7 +289,7 @@ body{
 
 <body>
 
-
+<div class="checkout-page">
 
 <header class="site-header">
 
@@ -262,14 +300,12 @@ body{
     </h1>
 
     <div
-      class="muted"
-      style="font-size:13px"
+      style="font-size:13px;color:#6b7280"
     >
       Secure Checkout
     </div>
 
   </div>
-
 
   <nav class="nav">
 
@@ -287,39 +323,136 @@ body{
 
     <a href="cart.html">
       Cart
-      (
-      <span id="cart-count">
-        0
-      </span>
-      )
-    </a>
-
-    <a href="profile.html">
-      Profile
     </a>
 
   </nav>
 
 </header>
 
+<div class="checkout-container">
 
+<div class="checkout-form">
 
+  <div class="section-title">
+    Delivery Details
+  </div>
 
+  <form id="checkoutForm">
 
-<div class="checkout-page">
+    <div class="form-group">
 
-  <div
-    class="checkout-card"
-    id="checkoutContainer"
-  >
+      <label>
+        Full Name
+      </label>
+
+      <input
+        type="text"
+        id="name"
+        required
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Email Address
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        required
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Phone Number
+      </label>
+
+      <input
+        type="tel"
+        id="phone"
+        required
+      >
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Delivery Address
+      </label>
+
+      <textarea
+        id="address"
+        required
+      ></textarea>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>
+        Payment Method
+      </label>
+
+      <select id="payment">
+
+        <option value="Cash On Delivery">
+          Cash On Delivery
+        </option>
+
+        <option value="UPI">
+          UPI
+        </option>
+
+        <option value="Card">
+          Credit / Debit Card
+        </option>
+
+      </select>
+
+    </div>
+
+    <button
+      type="submit"
+      class="place-order-btn"
+    >
+      Place Order
+    </button>
+
+  </form>
+
+</div>
+
+<div class="order-summary">
+
+  <div class="section-title">
+    Order Summary
+  </div>
+
+  <div id="cartItems">
+
+  </div>
+
+  <div class="total">
+
+    Total:
+    ₹<span id="grandTotal">
+      0
+    </span>
 
   </div>
 
 </div>
 
+</div>
 
-
-
+</div>
 
 <script type="module">
 
@@ -329,345 +462,262 @@ from './supabase.js';
 
 
 
-// GET CART
-function getCart(){
+// GET USER
+const {
+  data:{ user }
+} = await supabase.auth.getUser();
 
-  return JSON.parse(
-    localStorage.getItem('cart') || '[]'
-  );
+
+
+
+// LOGIN CHECK
+if(!user){
+
+  window.location.href =
+    'login.html';
+
+}
+
+
+
+
+
+
+
+
+
+
+// LOAD CART
+const cart =
+JSON.parse(
+  localStorage.getItem('cart') || '[]'
+);
+
+
+
+
+// EMPTY CART
+if(cart.length === 0){
+
+  alert('Cart is empty');
+
+  window.location.href =
+    'cart.html';
 
 }
 
 
 
-// UPDATE CART COUNT
-function updateCartCount(){
-
-  const cart = getCart();
-
-  const totalQty =
-    cart.reduce((s,i)=>s+i.qty,0);
-
-  document.getElementById('cart-count')
-  .innerText = totalQty;
-
-}
-
-
-updateCartCount();
 
 
 
 
-// RENDER CHECKOUT
-async function renderCheckout(){
-
-  const cart = getCart();
-
-  const container =
-    document.getElementById(
-      'checkoutContainer'
-    );
 
 
 
-  // EMPTY CART
-  if(cart.length === 0){
+// DISPLAY CART
+const cartContainer =
+document.getElementById(
+  'cartItems'
+);
 
-    container.innerHTML = `
+let grandTotal = 0;
 
-      <div class="empty-cart">
+cart.forEach(item => {
 
-        <h2>
-          Your cart is empty
-        </h2>
+  const total =
+    item.price * item.qty;
+
+  grandTotal += total;
+
+  cartContainer.innerHTML += `
+
+    <div class="cart-item">
+
+      <img
+        src="${item.image}"
+        class="cart-image"
+      >
+
+      <div>
+
+        <h3>
+          ${item.title}
+        </h3>
 
         <p>
-          Add products before checkout
+          Quantity:
+          ${item.qty}
         </p>
 
-        <a href="products.html">
-          Shop Products
-        </a>
+        <p>
+          ₹${total}
+        </p>
 
       </div>
 
-    `;
+    </div>
 
-    return;
+  `;
+
+});
+
+document.getElementById(
+  'grandTotal'
+).innerText = grandTotal;
+
+
+
+
+
+
+
+
+
+
+// PLACE ORDER
+document
+.getElementById('checkoutForm')
+.addEventListener('submit',
+
+async (e)=>{
+
+  e.preventDefault();
+
+
+
+
+  const name =
+    document.getElementById(
+      'name'
+    ).value;
+
+  const email =
+    document.getElementById(
+      'email'
+    ).value;
+
+  const phone =
+    document.getElementById(
+      'phone'
+    ).value;
+
+  const address =
+    document.getElementById(
+      'address'
+    ).value;
+
+  const payment =
+    document.getElementById(
+      'payment'
+    ).value;
+
+
+
+
+
+
+
+
+
+
+  // SAVE ORDERS
+  for(const item of cart){
+
+    const order = {
+
+      customer_id:user.id,
+
+      seller_id:item.seller_id || null,
+
+      customer_name:name,
+
+      customer_email:email,
+
+      customer_phone:phone,
+
+      customer_address:address,
+
+      payment_method:payment,
+
+      product_title:item.title,
+
+      product_image:item.image,
+
+      quantity:item.qty,
+
+      total:item.price * item.qty,
+
+      status:'Pending',
+
+      tracking_message:
+      'Order placed successfully'
+
+    };
+
+
+
+
+
+
+
+
+    const {
+      error
+    } = await supabase
+      .from('orders')
+      .insert([order]);
+
+
+
+
+    if(error){
+
+      console.log(error);
+
+      alert(error.message);
+
+      return;
+
+    }
 
   }
 
 
 
 
-  // TOTAL
-  const total =
-    cart.reduce((s,i)=>{
 
-      return s + (i.price * i.qty);
 
-    },0);
 
 
 
 
-  // SHOW FORM
-  container.innerHTML = `
+  // CLEAR CART
+  localStorage.removeItem('cart');
 
-    <div class="checkout-title">
-      Checkout
-    </div>
 
-    <div class="checkout-subtitle">
-      Complete your order details
-    </div>
 
 
 
-    <form id="checkoutForm">
 
-      <div class="form-group">
 
-        <label>
-          Full Name
-        </label>
 
-        <input
-          type="text"
-          id="name"
-          required
-        >
 
-      </div>
 
+  // SUCCESS
+  alert(
+    'Order placed successfully'
+  );
 
 
-      <div class="form-group">
 
-        <label>
-          Phone Number
-        </label>
 
-        <input
-          type="text"
-          id="phone"
-          required
-        >
+  window.location.href =
+    'success.html';
 
-      </div>
-
-
-
-      <div class="form-group">
-
-        <label>
-          Delivery Address
-        </label>
-
-        <textarea
-          id="address"
-          required
-        ></textarea>
-
-      </div>
-
-
-
-      <div class="form-group">
-
-        <label>
-          Payment Method
-        </label>
-
-        <select id="payment">
-
-          <option value="COD">
-            Cash On Delivery
-          </option>
-
-          <option value="UPI">
-            UPI
-          </option>
-
-          <option value="CARD">
-            Debit / Credit Card
-          </option>
-
-        </select>
-
-      </div>
-
-
-
-
-      <div class="order-summary">
-
-        <h3>
-          Order Summary
-        </h3>
-
-
-        ${cart.map(item => `
-
-          <div class="summary-item">
-
-            <span>
-              ${item.title}
-              ×
-              ${item.qty}
-            </span>
-
-            <span>
-              ₹${item.price * item.qty}
-            </span>
-
-          </div>
-
-        `).join('')}
-
-
-
-
-        <div class="total-row">
-
-          <span>
-            Total
-          </span>
-
-          <span>
-            ₹${total}
-          </span>
-
-        </div>
-
-      </div>
-
-
-
-
-      <button
-        type="submit"
-        class="place-order-btn"
-      >
-        Place Order
-      </button>
-
-    </form>
-
-  `;
-
-
-
-
-
-  // SUBMIT ORDER
-  document
-  .getElementById('checkoutForm')
-  .addEventListener('submit',
-
-    async (e)=>{
-
-      e.preventDefault();
-
-
-
-
-      // USER
-      const {
-        data: { user }
-      } = await supabase.auth.getUser();
-
-
-
-
-      if(!user){
-
-        alert('Please login first');
-
-        window.location.href =
-          'login.html';
-
-        return;
-
-      }
-
-
-
-
-      // ORDER DATA
-      const orderData = {
-
-        user_id: user.id,
-
-        items: cart,
-
-        total: total,
-
-        customer_name:
-          document.getElementById('name').value,
-
-        phone:
-          document.getElementById('phone').value,
-
-        address:
-          document.getElementById('address').value,
-
-        payment_method:
-          document.getElementById('payment').value,
-
-        status: 'Pending'
-
-      };
-
-
-
-
-      // SAVE ORDER
-      const {
-        error
-      } = await supabase
-        .from('orders')
-        .insert([orderData]);
-
-
-
-
-      if(error){
-
-        alert(error.message);
-
-        return;
-
-      }
-
-
-
-
-      // CLEAR CART
-      localStorage.removeItem('cart');
-
-
-
-
-      // SUCCESS
-      alert('Order placed successfully');
-
-
-
-
-      window.location.href =
-        'success.html';
-
-  });
-
-}
-
-
-renderCheckout();
+});
 
 </script>
-
 
 </body>
 </html>

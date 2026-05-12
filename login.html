@@ -485,12 +485,14 @@ body{
 
       <label>
         Password
+        Minimum 6 Characters
       </label>
 
       <input
         type="password"
         id="password"
-        placeholder="Enter password"
+        placeholder="Enter password "
+        minlength="6"
         required
       >
 
@@ -679,6 +681,17 @@ async (e)=>{
     return;
 
   }
+
+if(password.length < 6){
+
+  alert(
+    'Password must contain at least 6 characters'
+  );
+
+  return;
+
+}
+
 
 
 
